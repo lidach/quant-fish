@@ -50,7 +50,6 @@ rsconnect/
 
 *.o
 *.dll
-*_files
 !software_installation_files
 .vscode
 *.exe
