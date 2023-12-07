@@ -1,0 +1,59 @@
+---
+title: "Equilibrium Recruitment"
+format: 
+  revealjs: 
+    multiplex: true
+    transition: fade
+    slide-number: true
+editor: source
+---
+
+## Stock-recruitment functions
+
+Stock-recruitment functions describe the production of new recruits to a fish population and the dependence of that production on the spawning component of the population.
+
+## Definitions
+
+-   $R_0$: virgin, unfished recruitment
+
+-   $SBPR_0$: virgin, unfished spawning biomass per recruit
+
+-   $SSB_0$: virgin unfished spawning biomass
+
+-   $SBPR_F$ biomass per recruit at $F \neq 0$
+
+-   $YPR_F$: yield per recruit at $F \neq 0$
+
+-   $CR$: compensation ratio
+
+-   $h$: steepness
+
+-   $SRR$: stock-recruitment relationship
+
+## YPR quantities at various fishing mortalities
+
+Find $SBPR$ and $YPR$ at the $F$ value of interest and calculate these values when $F = 0$. This will vary depending on your model:
+
+$$
+Y P R=\Sigma_{a} F s_{a} N_{a} w_{a}
+$$
+
+-   $N_a$ is a proportional expected numbers-at-age
+
+-   $w_a$ is the expected weight-at-age
+
+-   $s_a$ is fishery selectivity
+
+## YPR quantities at various fishing mortalities
+
+$$
+SBPR = \sum_a E_a N_a w_a
+$$
+
+-   $E_a$: some measure of population's fecundity at age
+
+-   the resulting $SBPR$ is going to vary with $F$ because $N_a$ will decline faster when $F$ is greater than zero.
+
+## Beverton-Holt - SRR in terms of $SBPR$
+
+## Conversion to compensation ratio
