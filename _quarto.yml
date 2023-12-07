@@ -7,6 +7,9 @@ website:
   navbar:
     left:
       - href: index.html
+      - text: Numerical Methods
+        href: num_meths/num_meths.html
+
 
 
 format:

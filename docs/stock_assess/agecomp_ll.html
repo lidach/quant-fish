@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quantitative Fisheries Notes</title>
+<title>Quantitative Fisheries Notes - Equilibrium Recruitment</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +23,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -60,18 +60,20 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Quantitative Fisheries Notes</span>
     </a>
   </div>
@@ -82,12 +84,8 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item compact">
-    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../index.html" rel="" target="">
  <span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./num_meths/num_meths.html" rel="" target="">
- <span class="menu-text">Numerical Methods</span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
@@ -100,13 +98,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="agecomp_ll.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Quantitative Fisheries Notes</h1>
+<h1 class="title">Equilibrium Recruitment</h1>
 </div>
 
 
@@ -121,9 +121,53 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>test</p>
+<section id="stock-recruitment-functions" class="level2">
+<h2 class="anchored" data-anchor-id="stock-recruitment-functions">Stock-recruitment functions</h2>
+<p>Stock-recruitment functions describe the production of new recruits to a fish population and the dependence of that production on the spawning component of the population.</p>
+</section>
+<section id="definitions" class="level2">
+<h2 class="anchored" data-anchor-id="definitions">Definitions</h2>
+<ul>
+<li><p><span class="math inline">\(R_0\)</span>: virgin, unfished recruitment</p></li>
+<li><p><span class="math inline">\(SBPR_0\)</span>: virgin, unfished spawning biomass per recruit</p></li>
+<li><p><span class="math inline">\(SSB_0\)</span>: virgin unfished spawning biomass</p></li>
+<li><p><span class="math inline">\(SBPR_F\)</span> biomass per recruit at <span class="math inline">\(F \neq 0\)</span></p></li>
+<li><p><span class="math inline">\(YPR_F\)</span>: yield per recruit at <span class="math inline">\(F \neq 0\)</span></p></li>
+<li><p><span class="math inline">\(CR\)</span>: compensation ratio</p></li>
+<li><p><span class="math inline">\(h\)</span>: steepness</p></li>
+<li><p><span class="math inline">\(SRR\)</span>: stock-recruitment relationship</p></li>
+</ul>
+</section>
+<section id="ypr-quantities-at-various-fishing-mortalities" class="level2">
+<h2 class="anchored" data-anchor-id="ypr-quantities-at-various-fishing-mortalities">YPR quantities at various fishing mortalities</h2>
+<p>Find <span class="math inline">\(SBPR\)</span> and <span class="math inline">\(YPR\)</span> at the <span class="math inline">\(F\)</span> value of interest and calculate these values when <span class="math inline">\(F = 0\)</span>. This will vary depending on your model:</p>
+<p><span class="math display">\[
+Y P R=\Sigma_{a} F s_{a} N_{a} w_{a}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(N_a\)</span> is a proportional expected numbers-at-age</p></li>
+<li><p><span class="math inline">\(w_a\)</span> is the expected weight-at-age</p></li>
+<li><p><span class="math inline">\(s_a\)</span> is fishery selectivity</p></li>
+</ul>
+</section>
+<section id="ypr-quantities-at-various-fishing-mortalities-1" class="level2">
+<h2 class="anchored" data-anchor-id="ypr-quantities-at-various-fishing-mortalities-1">YPR quantities at various fishing mortalities</h2>
+<p><span class="math display">\[
+SBPR = \sum_a E_a N_a w_a
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(E_a\)</span>: some measure of population’s fecundity at age</p></li>
+<li><p>the resulting <span class="math inline">\(SBPR\)</span> is going to vary with <span class="math inline">\(F\)</span> because <span class="math inline">\(N_a\)</span> will decline faster when <span class="math inline">\(F\)</span> is greater than zero.</p></li>
+</ul>
+</section>
+<section id="beverton-holt---srr-in-terms-of-sbpr" class="level2">
+<h2 class="anchored" data-anchor-id="beverton-holt---srr-in-terms-of-sbpr">Beverton-Holt - SRR in terms of <span class="math inline">\(SBPR\)</span></h2>
+</section>
+<section id="conversion-to-compensation-ratio" class="level2">
+<h2 class="anchored" data-anchor-id="conversion-to-compensation-ratio">Conversion to compensation ratio</h2>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

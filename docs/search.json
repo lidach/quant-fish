@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Quantitative Fisheries Notes",
     "section": "",
-    "text": "Topic\n\n\n\n\nNotes\n\n\n\n\nCode\n\n\n\n\nAdditional References\n\n\n\n\n\n\n\n\nNumerical Methods\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\nXX\n\n\n\n\n\n\n\n\n\n\n📖\n\n\n\n\n🖥️"
+    "text": "test"
   },
   {
     "objectID": "num_meths/Newton.html#newton-raphson-description",
@@ -19,5 +19,110 @@
     "title": "Newton-Raphson Method",
     "section": "Formula",
     "text": "Formula\n\nThe core formula for the Newton-Raphson methods is: \\[\nx_{n+1} = x_n-\\dfrac{f(x_n)}{(f^\\prime x_n)}\n\\]\n\nwhere:\n\n\\(x_{n+1}\\) is the next approximation of the root\n\\(x_n\\) is the current approximation of the root\n\\(f(x_n)\\) is the value of the function at \\(x_n\\)\n\\(f^\\prime x_n\\) is the derivative (slope) of the function at \\(x_n\\)"
+  },
+  {
+    "objectID": "stock_assess/equili_recruit.html",
+    "href": "stock_assess/equili_recruit.html",
+    "title": "Equilibrium Recruitment",
+    "section": "",
+    "text": "Stock-recruitment functions describe the production of new recruits to a fish population and the dependence of that production on the spawning component of the population."
+  },
+  {
+    "objectID": "stock_assess/equili_recruit.html#stock-recruitment-functions",
+    "href": "stock_assess/equili_recruit.html#stock-recruitment-functions",
+    "title": "Equilibrium Recruitment",
+    "section": "",
+    "text": "Stock-recruitment functions describe the production of new recruits to a fish population and the dependence of that production on the spawning component of the population."
+  },
+  {
+    "objectID": "stock_assess/equili_recruit.html#definitions",
+    "href": "stock_assess/equili_recruit.html#definitions",
+    "title": "Equilibrium Recruitment",
+    "section": "Definitions",
+    "text": "Definitions\n\n\\(R_0\\): virgin, unfished recruitment\n\\(SBPR_0\\): virgin, unfished spawning biomass per recruit\n\\(SSB_0\\): virgin unfished spawning biomass\n\\(SBPR_F\\) biomass per recruit at \\(F \\neq 0\\)\n\\(YPR_F\\): yield per recruit at \\(F \\neq 0\\)\n\\(CR\\): compensation ratio\n\\(h\\): steepness\n\\(SRR\\): stock-recruitment relationship"
+  },
+  {
+    "objectID": "stock_assess/equili_recruit.html#ypr-quantities-at-various-fishing-mortalities",
+    "href": "stock_assess/equili_recruit.html#ypr-quantities-at-various-fishing-mortalities",
+    "title": "Equilibrium Recruitment",
+    "section": "YPR quantities at various fishing mortalities",
+    "text": "YPR quantities at various fishing mortalities\nFind \\(SBPR\\) and \\(YPR\\) at the \\(F\\) value of interest and calculate these values when \\(F = 0\\). This will vary depending on your model:\n\\[\nY P R=\\Sigma_{a} F s_{a} N_{a} w_{a}\n\\]\n\n\\(N_a\\) is a proportional expected numbers-at-age\n\\(w_a\\) is the expected weight-at-age\n\\(s_a\\) is fishery selectivity"
+  },
+  {
+    "objectID": "stock_assess/equili_recruit.html#ypr-quantities-at-various-fishing-mortalities-1",
+    "href": "stock_assess/equili_recruit.html#ypr-quantities-at-various-fishing-mortalities-1",
+    "title": "Equilibrium Recruitment",
+    "section": "YPR quantities at various fishing mortalities",
+    "text": "YPR quantities at various fishing mortalities\n\\[\nSBPR = \\sum_a E_a N_a w_a\n\\]\n\n\\(E_a\\): some measure of population’s fecundity at age\nthe resulting \\(SBPR\\) is going to vary with \\(F\\) because \\(N_a\\) will decline faster when \\(F\\) is greater than zero."
+  },
+  {
+    "objectID": "stock_assess/equili_recruit.html#beverton-holt---srr-in-terms-of-sbpr",
+    "href": "stock_assess/equili_recruit.html#beverton-holt---srr-in-terms-of-sbpr",
+    "title": "Equilibrium Recruitment",
+    "section": "Beverton-Holt - SRR in terms of \\(SBPR\\)",
+    "text": "Beverton-Holt - SRR in terms of \\(SBPR\\)"
+  },
+  {
+    "objectID": "stock_assess/equili_recruit.html#conversion-to-compensation-ratio",
+    "href": "stock_assess/equili_recruit.html#conversion-to-compensation-ratio",
+    "title": "Equilibrium Recruitment",
+    "section": "Conversion to compensation ratio",
+    "text": "Conversion to compensation ratio"
+  },
+  {
+    "objectID": "stock_assess/agecomp_ll.html",
+    "href": "stock_assess/agecomp_ll.html",
+    "title": "Equilibrium Recruitment",
+    "section": "",
+    "text": "Stock-recruitment functions describe the production of new recruits to a fish population and the dependence of that production on the spawning component of the population."
+  },
+  {
+    "objectID": "stock_assess/agecomp_ll.html#stock-recruitment-functions",
+    "href": "stock_assess/agecomp_ll.html#stock-recruitment-functions",
+    "title": "Equilibrium Recruitment",
+    "section": "",
+    "text": "Stock-recruitment functions describe the production of new recruits to a fish population and the dependence of that production on the spawning component of the population."
+  },
+  {
+    "objectID": "stock_assess/agecomp_ll.html#definitions",
+    "href": "stock_assess/agecomp_ll.html#definitions",
+    "title": "Equilibrium Recruitment",
+    "section": "Definitions",
+    "text": "Definitions\n\n\\(R_0\\): virgin, unfished recruitment\n\\(SBPR_0\\): virgin, unfished spawning biomass per recruit\n\\(SSB_0\\): virgin unfished spawning biomass\n\\(SBPR_F\\) biomass per recruit at \\(F \\neq 0\\)\n\\(YPR_F\\): yield per recruit at \\(F \\neq 0\\)\n\\(CR\\): compensation ratio\n\\(h\\): steepness\n\\(SRR\\): stock-recruitment relationship"
+  },
+  {
+    "objectID": "stock_assess/agecomp_ll.html#ypr-quantities-at-various-fishing-mortalities",
+    "href": "stock_assess/agecomp_ll.html#ypr-quantities-at-various-fishing-mortalities",
+    "title": "Equilibrium Recruitment",
+    "section": "YPR quantities at various fishing mortalities",
+    "text": "YPR quantities at various fishing mortalities\nFind \\(SBPR\\) and \\(YPR\\) at the \\(F\\) value of interest and calculate these values when \\(F = 0\\). This will vary depending on your model:\n\\[\nY P R=\\Sigma_{a} F s_{a} N_{a} w_{a}\n\\]\n\n\\(N_a\\) is a proportional expected numbers-at-age\n\\(w_a\\) is the expected weight-at-age\n\\(s_a\\) is fishery selectivity"
+  },
+  {
+    "objectID": "stock_assess/agecomp_ll.html#ypr-quantities-at-various-fishing-mortalities-1",
+    "href": "stock_assess/agecomp_ll.html#ypr-quantities-at-various-fishing-mortalities-1",
+    "title": "Equilibrium Recruitment",
+    "section": "YPR quantities at various fishing mortalities",
+    "text": "YPR quantities at various fishing mortalities\n\\[\nSBPR = \\sum_a E_a N_a w_a\n\\]\n\n\\(E_a\\): some measure of population’s fecundity at age\nthe resulting \\(SBPR\\) is going to vary with \\(F\\) because \\(N_a\\) will decline faster when \\(F\\) is greater than zero."
+  },
+  {
+    "objectID": "stock_assess/agecomp_ll.html#beverton-holt---srr-in-terms-of-sbpr",
+    "href": "stock_assess/agecomp_ll.html#beverton-holt---srr-in-terms-of-sbpr",
+    "title": "Equilibrium Recruitment",
+    "section": "Beverton-Holt - SRR in terms of \\(SBPR\\)",
+    "text": "Beverton-Holt - SRR in terms of \\(SBPR\\)"
+  },
+  {
+    "objectID": "stock_assess/agecomp_ll.html#conversion-to-compensation-ratio",
+    "href": "stock_assess/agecomp_ll.html#conversion-to-compensation-ratio",
+    "title": "Equilibrium Recruitment",
+    "section": "Conversion to compensation ratio",
+    "text": "Conversion to compensation ratio"
+  },
+  {
+    "objectID": "num_meths/num_meths.html",
+    "href": "num_meths/num_meths.html",
+    "title": "Quantitative Fisheries Notes",
+    "section": "",
+    "text": "Topic\n\n\n\n\nNotes\n\n\n\n\nCode\n\n\n\n\nAdditional References\n\n\n\n\n\n\n\n\nNewton-Raphson Method\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\nXX\n\n\n\n\n\n\n\n\n\n\n📖\n\n\n\n\n🖥️"
   }
 ]
