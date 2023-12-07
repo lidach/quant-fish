@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Quantitative Fisheries Notes",
+    "section": "",
+    "text": "Topic\n\n\n\n\nNotes\n\n\n\n\nCode\n\n\n\n\nAdditional References\n\n\n\n\n\n\n\n\nNumerical Methods\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\nXX\n\n\n\n\n\n\n\n\n\n\n📖\n\n\n\n\n🖥️"
+  },
+  {
+    "objectID": "num_meths/Newton.html#newton-raphson-description",
+    "href": "num_meths/Newton.html#newton-raphson-description",
+    "title": "Newton-Raphson Method",
+    "section": "Newton-Raphson description",
+    "text": "Newton-Raphson description\n\nNewton-Raphson method is an iterative numerical technique used to finding approximate solutions to equations.\nThis is used to solve equations of the form \\(f(x) = 0\\) where \\(f(x)\\) is a real-valued function of a real variable.\nGiven an initial guess (\\(x_0\\)), the method iteratively refines this guess to get closer and closer to a root of the equation."
+  },
+  {
+    "objectID": "num_meths/Newton.html#formula",
+    "href": "num_meths/Newton.html#formula",
+    "title": "Newton-Raphson Method",
+    "section": "Formula",
+    "text": "Formula\n\nThe core formula for the Newton-Raphson methods is: \\[\nx_{n+1} = x_n-\\dfrac{f(x_n)}{(f^\\prime x_n)}\n\\]\n\nwhere:\n\n\\(x_{n+1}\\) is the next approximation of the root\n\\(x_n\\) is the current approximation of the root\n\\(f(x_n)\\) is the value of the function at \\(x_n\\)\n\\(f^\\prime x_n\\) is the derivative (slope) of the function at \\(x_n\\)"
+  }
+]

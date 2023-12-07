@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="equili_recruit_files/libs/clipboard/clipboard.min.js"></script>
-<script src="equili_recruit_files/libs/quarto-html/tabby.min.js"></script>
-<script src="equili_recruit_files/libs/quarto-html/popper.min.js"></script>
-<script src="equili_recruit_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="equili_recruit_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="equili_recruit_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="equili_recruit_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="equili_recruit_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.433">
 
-  <title>Equilibrium Recruitment</title>
+  <title>Quantitative Fisheries Notes - Newton-Raphson Method</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="equili_recruit_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="equili_recruit_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -29,11 +29,11 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="equili_recruit_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="equili_recruit_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="equili_recruit_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="equili_recruit_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="equili_recruit_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -324,56 +324,35 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Equilibrium Recruitment</h1>
+  <h1 class="title">Newton-Raphson Method</h1>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section id="equilibrium-recruitment-algebra" class="slide level2">
-<h2>Equilibrium recruitment algebra</h2>
-<p>This illustrates how to string quantities together in an age-structured model that apply a stock-recruitment relationship to derive equilibrium quantities.</p>
-</section>
-<section id="definitions" class="slide level2">
-<h2>Definitions</h2>
+<section id="newton-raphson-description" class="slide level2">
+<h2>Newton-Raphson description</h2>
 <ul>
-<li><p><span class="math inline">\(R_0\)</span>: virgin, unfished recruitment</p></li>
-<li><p><span class="math inline">\(SBPR_0\)</span>: virgin, unfished spawning biomass per recruit</p></li>
-<li><p><span class="math inline">\(SSB_0\)</span>: virgin unfished spawning biomass</p></li>
-<li><p><span class="math inline">\(SBPR_F\)</span> biomass per recruit at <span class="math inline">\(F \neq 0\)</span></p></li>
-<li><p><span class="math inline">\(YPR_F\)</span>: yield per recruit at <span class="math inline">\(F \neq 0\)</span></p></li>
-<li><p><span class="math inline">\(CR\)</span>: compensation ratio</p></li>
+<li><p>Newton-Raphson method is an iterative numerical technique used to finding approximate solutions to equations.</p></li>
+<li><p>This is used to solve equations of the form <span class="math inline">\(f(x) = 0\)</span> where <span class="math inline">\(f(x)\)</span> is a real-valued function of a real variable.</p></li>
+<li><p>Given an initial guess (<span class="math inline">\(x_0\)</span>), the method iteratively refines this guess to get closer and closer to a root of the equation.</p></li>
 </ul>
 </section>
-<section id="ypr-quantities-at-various-fishing-mortalities" class="slide level2">
-<h2>YPR quantities at various fishing mortalities</h2>
-<ol type="1">
-<li>Find <span class="math inline">\(SBPR\)</span> and <span class="math inline">\(YPR\)</span> at the <span class="math inline">\(F\)</span> value of interest and calculate these values when <span class="math inline">\(F = 0\)</span>. This will vary depending on your model:</li>
-</ol>
-<p><span class="math display">\[
-Y P R=\Sigma_{a} F s_{a} N_{a} w_{a}
-\]</span></p>
+<section id="formula" class="slide level2">
+<h2>Formula</h2>
 <ul>
-<li><p><span class="math inline">\(N_a\)</span> is a proportional expected numbers-at-age</p></li>
-<li><p><span class="math inline">\(w_a\)</span> is the expected weight-at-age</p></li>
-<li><p><span class="math inline">\(s_a\)</span> is fishery selectivity</p></li>
+<li>The core formula for the Newton-Raphson methods is: <span class="math display">\[
+x_{n+1} = x_n-\dfrac{f(x_n)}{(f^\prime x_n)}
+\]</span></li>
 </ul>
-</section>
-<section id="ypr-quantities-at-various-fishing-mortalities-1" class="slide level2">
-<h2>YPR quantities at various fishing mortalities</h2>
-<p><span class="math display">\[
-SBPR = \sum_a E_a N_a w_a
-\]</span></p>
+<p>where:</p>
 <ul>
-<li><p><span class="math inline">\(E_a\)</span>: some measure of population’s fecundity at age</p></li>
-<li><p>the resulting <span class="math inline">\(SBPR\)</span> is going to vary with <span class="math inline">\(F\)</span> because <span class="math inline">\(N_a\)</span> will decline faster when <span class="math inline">\(F\)</span> is greater than zero.</p></li>
+<li><p><span class="math inline">\(x_{n+1}\)</span> is the next approximation of the root</p></li>
+<li><p><span class="math inline">\(x_n\)</span> is the current approximation of the root</p></li>
+<li><p><span class="math inline">\(f(x_n)\)</span> is the value of the function at <span class="math inline">\(x_n\)</span></p></li>
+<li><p><span class="math inline">\(f^\prime x_n\)</span> is the derivative (slope) of the function at <span class="math inline">\(x_n\)</span></p></li>
 </ul>
-</section>
-<section id="beverton-holt---stock-recruitment-relationship-in-terms-of-sbpr" class="slide level2">
-<h2>Beverton-Holt - Stock-recruitment relationship in terms of <span class="math inline">\(SBPR\)</span></h2>
-</section>
-<section id="conversion-to-compensation-ratio" class="slide level2">
-<h2>Conversion to compensation ratio</h2>
+
 <div class="footer footer-default">
 
 </div>
@@ -382,21 +361,21 @@ SBPR = \sum_a E_a N_a w_a
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="equili_recruit_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="equili_recruit_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="equili_recruit_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="equili_recruit_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="equili_recruit_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="equili_recruit_files/libs/revealjs/plugin/multiplex/socket.io.js"></script>
-  <script src="equili_recruit_files/libs/revealjs/plugin/multiplex/multiplex.js"></script>
-  <script src="equili_recruit_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/multiplex/socket.io.js"></script>
+  <script src="../site_libs/revealjs/plugin/multiplex/multiplex.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="equili_recruit_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="equili_recruit_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="equili_recruit_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="equili_recruit_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -412,7 +391,7 @@ SBPR = \sum_a E_a N_a w_a
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'multiplex': {"secret":null,"id":"42b0e398b322f08e","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"cb4b7a92025b4eec","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
  
         // Display controls in the bottom right corner
