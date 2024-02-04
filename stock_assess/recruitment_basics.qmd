@@ -1,0 +1,89 @@
+---
+title: "Understanding Stock-Recruitment"
+format:
+  html:
+    toc: true
+    page-layout: full
+editor: visual
+---
+
+## Stock-recruitment functions
+
+Stock-recruitment functions describe the production of new recruits to a fish population and the dependence of that production on the spawning component of the population.
+
+# Deep dive into origin of stock-recruitment relationship
+
+## 
+
+## Beverton-Holt
+
+## Ricker
+
+## What is steepness?
+
+"the fraction of recruitment from a virgin population obtained when the spawner are at 20% of the virgin level"
+
+
+
+## Equilibrium recruitment
+
+## Definitions
+
+-   $R_0$: virgin, unfished recruitment
+
+-   $\Phi_0$: virgin, unfished spawning biomass per recruit
+
+-   $S_{0}$: virgin unfished spawning biomass
+
+-   $\Phi_F$ biomass per recruit at $F \neq 0$
+
+-   $YPR_F$: yield per recruit at $F \neq 0$
+
+-   $CR$: compensation ratio
+
+-   $h$: steepness
+
+-   $SRR$: stock-recruitment relationship
+
+## YPR quantities at various fishing mortalities
+
+Find $SBPR$ and $YPR$ at the $F$ value of interest and calculate these values when $F = 0$. This will vary depending on your model:
+
+$$
+Y P R=\Sigma_{a} F s_{a} N_{a} w_{a}
+$$
+
+-   $N_a$ is a proportional expected numbers-at-age
+
+-   $w_a$ is the expected weight-at-age
+
+-   $s_a$ is fishery selectivity
+
+## YPR quantities at various fishing mortalities
+
+$$
+SBPR = \sum_a E_a N_a w_a
+$$
+
+-   $E_a$: some measure of population's fecundity at age
+
+-   the resulting $SBPR$ is going to vary with $F$ because $N_a$ will decline faster when $F$ is greater than zero.
+
+## Beverton-Holt - SRR in terms of $SBPR$
+
+## Beverton-Holt function in terms of steepness
+
+steepness as a function of proportion $p$ of unfished spawning stock size $S_0$ and $\alpha$ and the unexploited spawning biomass per recruit $\Phi_0$
+
+$$
+h(p) = \dfrac{R(S= pS_0)}{R(S=S_0)} = p \dfrac{1+\beta S_0}{1_p \beta S_0} = p \dfrac{1 + \beta \Phi_0 R_0}{1 + p \beta \Phi_0 R_0}
+$$
+
+## Beverton-Holt function in terms of steepness
+
+To complete the steepness transformation of the SRR, we must define unexploited recruitment and unexploited spawning biomass per recruit
+
+## Ricker function in terms of steepness
+steepness as a function of proportion $p$ of unfished spawning stock size $S_0$ and $\alpha$ and the unexploited spawning biomass per recruit $\Phi_0$
+
+## Conversion to compensation ratio

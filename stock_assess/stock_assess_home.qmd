@@ -1,0 +1,11 @@
+---
+title: "Stock Assesssment Notes"
+tbl-colwidths: [20,20,10,10,40]
+---
+
+| Topic | Sub-topic | Notes |  Code  | Additional References |
+|:-:|:-:|:-:|:-:|:-:|
+| Recruitment | Understanding Stock Recruitment | [📖](/stock_assess/recruitment_basics.html) | [🖥️]() | - Miller, T.J. and Brooks, E.N., 2021. [Steepness is a slippery slope](https://doi.org/10.1111/faf.12534). Fish and Fisheries, 22(3), pp 634-645. |
+| | | [📖]() | [🖥️]() | |
+| Model Diagnostics | TMB Model Convergence | [📖](/stock_assess/TMB_convergence.html) | [🖥️]() | |
+

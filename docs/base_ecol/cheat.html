@@ -10,7 +10,7 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.433">
 
-  <title>Quantitative Fisheries Notes - Equilibrium Recruitment</title>
+  <title>Quantitative Fisheries Notes - Mathematics Cheat Sheet for Quantitative Ecology</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -324,56 +324,43 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Equilibrium Recruitment</h1>
+  <h1 class="title">Mathematics Cheat Sheet for Quantitative Ecology</h1>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section id="stock-recruitment-functions" class="slide level2">
-<h2>Stock-recruitment functions</h2>
-<p>Stock-recruitment functions describe the production of new recruits to a fish population and the dependence of that production on the spawning component of the population.</p>
-</section>
-<section id="definitions" class="slide level2">
-<h2>Definitions</h2>
-<ul>
-<li><p><span class="math inline">\(R_0\)</span>: virgin, unfished recruitment</p></li>
-<li><p><span class="math inline">\(SBPR_0\)</span>: virgin, unfished spawning biomass per recruit</p></li>
-<li><p><span class="math inline">\(SSB_0\)</span>: virgin unfished spawning biomass</p></li>
-<li><p><span class="math inline">\(SBPR_F\)</span> biomass per recruit at <span class="math inline">\(F \neq 0\)</span></p></li>
-<li><p><span class="math inline">\(YPR_F\)</span>: yield per recruit at <span class="math inline">\(F \neq 0\)</span></p></li>
-<li><p><span class="math inline">\(CR\)</span>: compensation ratio</p></li>
-<li><p><span class="math inline">\(h\)</span>: steepness</p></li>
-<li><p><span class="math inline">\(SRR\)</span>: stock-recruitment relationship</p></li>
-</ul>
-</section>
-<section id="ypr-quantities-at-various-fishing-mortalities" class="slide level2">
-<h2>YPR quantities at various fishing mortalities</h2>
-<p>Find <span class="math inline">\(SBPR\)</span> and <span class="math inline">\(YPR\)</span> at the <span class="math inline">\(F\)</span> value of interest and calculate these values when <span class="math inline">\(F = 0\)</span>. This will vary depending on your model:</p>
+<section id="exponents-and-logarithms" class="slide level2">
+<h2>Exponents and Logarithms</h2>
+<h3 id="properties-of-exponentials">Properties of Exponentials</h3>
 <p><span class="math display">\[
-Y P R=\Sigma_{a} F s_{a} N_{a} w_{a}
+x^ax^b = x^{a+b} \\
+\dfrac{x^a}{x^b} = x^{a-b} \\
+x^a = e^{a log(x)} \\
+(x^{a})^b = x^{ab} \\
+x^{-a} = \dfrac{1}{x^a}
 \]</span></p>
-<ul>
-<li><p><span class="math inline">\(N_a\)</span> is a proportional expected numbers-at-age</p></li>
-<li><p><span class="math inline">\(w_a\)</span> is the expected weight-at-age</p></li>
-<li><p><span class="math inline">\(s_a\)</span> is fishery selectivity</p></li>
-</ul>
 </section>
-<section id="ypr-quantities-at-various-fishing-mortalities-1" class="slide level2">
-<h2>YPR quantities at various fishing mortalities</h2>
+<section id="exponents-and-logarithms-1" class="slide level2">
+<h2>Exponents and Logarithms</h2>
+<h3 id="properties-of-logarithms">Properties of Logarithms</h3>
 <p><span class="math display">\[
-SBPR = \sum_a E_a N_a w_a
+log(x^a) = a log(x) \\
+log(ab) = log(a) + log(b) \\
+log\left(\dfrac{a}{b}\right) = log(a) - log(b)
 \]</span></p>
-<ul>
-<li><p><span class="math inline">\(E_a\)</span>: some measure of population’s fecundity at age</p></li>
-<li><p>the resulting <span class="math inline">\(SBPR\)</span> is going to vary with <span class="math inline">\(F\)</span> because <span class="math inline">\(N_a\)</span> will decline faster when <span class="math inline">\(F\)</span> is greater than zero.</p></li>
-</ul>
 </section>
-<section id="beverton-holt---srr-in-terms-of-sbpr" class="slide level2">
-<h2>Beverton-Holt - SRR in terms of <span class="math inline">\(SBPR\)</span></h2>
+<section id="calculus---derivatives" class="slide level2">
+<h2>Calculus - Derivatives</h2>
 </section>
-<section id="conversion-to-compensation-ratio" class="slide level2">
-<h2>Conversion to compensation ratio</h2>
+<section id="calculus---integrals" class="slide level2">
+<h2>Calculus - Integrals</h2>
+</section>
+<section id="linear-algebra---matrix-math" class="slide level2">
+<h2>Linear Algebra - Matrix Math</h2>
+</section>
+<section id="linear-algebra---eigenvalues-and-eigenvectors" class="slide level2">
+<h2>Linear Algebra - Eigenvalues and Eigenvectors</h2>
 
 <div class="footer footer-default">
 
@@ -413,7 +400,7 @@ SBPR = \sum_a E_a N_a w_a
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'multiplex': {"secret":"17007749643598818617","id":"42b0e398b322f08e","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"f56ab35d648ef983","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -587,7 +574,7 @@ SBPR = \sum_a E_a N_a w_a
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
 
           RevealMath,
-          RevealNotes,
+          
           RevealSearch,
           RevealZoom
         ]

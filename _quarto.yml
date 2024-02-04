@@ -9,6 +9,8 @@ website:
       - href: index.html
       - text: Numerical Methods
         href: num_meths/num_meths.html
+      - text: Stock Assessment
+        href: stock_assess/stock_assess_home.html
 
 
 

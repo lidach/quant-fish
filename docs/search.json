@@ -1,10 +1,108 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Quantitative Fisheries Notes",
+    "objectID": "base_ecol/cheat.html#exponents-and-logarithms",
+    "href": "base_ecol/cheat.html#exponents-and-logarithms",
+    "title": "Mathematics Cheat Sheet for Quantitative Ecology",
+    "section": "Exponents and Logarithms",
+    "text": "Exponents and Logarithms\nProperties of Exponentials\n\\[\nx^ax^b = x^{a+b} \\\\\n\\dfrac{x^a}{x^b} = x^{a-b} \\\\\nx^a = e^{a log(x)} \\\\\n(x^{a})^b = x^{ab} \\\\\nx^{-a} = \\dfrac{1}{x^a}\n\\]"
+  },
+  {
+    "objectID": "base_ecol/cheat.html#exponents-and-logarithms-1",
+    "href": "base_ecol/cheat.html#exponents-and-logarithms-1",
+    "title": "Mathematics Cheat Sheet for Quantitative Ecology",
+    "section": "Exponents and Logarithms",
+    "text": "Exponents and Logarithms\nProperties of Logarithms\n\\[\nlog(x^a) = a log(x) \\\\\nlog(ab) = log(a) + log(b) \\\\\nlog\\left(\\dfrac{a}{b}\\right) = log(a) - log(b)\n\\]"
+  },
+  {
+    "objectID": "base_ecol/cheat.html#calculus---derivatives",
+    "href": "base_ecol/cheat.html#calculus---derivatives",
+    "title": "Mathematics Cheat Sheet for Quantitative Ecology",
+    "section": "Calculus - Derivatives",
+    "text": "Calculus - Derivatives"
+  },
+  {
+    "objectID": "base_ecol/cheat.html#calculus---integrals",
+    "href": "base_ecol/cheat.html#calculus---integrals",
+    "title": "Mathematics Cheat Sheet for Quantitative Ecology",
+    "section": "Calculus - Integrals",
+    "text": "Calculus - Integrals"
+  },
+  {
+    "objectID": "base_ecol/cheat.html#linear-algebra---matrix-math",
+    "href": "base_ecol/cheat.html#linear-algebra---matrix-math",
+    "title": "Mathematics Cheat Sheet for Quantitative Ecology",
+    "section": "Linear Algebra - Matrix Math",
+    "text": "Linear Algebra - Matrix Math"
+  },
+  {
+    "objectID": "base_ecol/cheat.html#linear-algebra---eigenvalues-and-eigenvectors",
+    "href": "base_ecol/cheat.html#linear-algebra---eigenvalues-and-eigenvectors",
+    "title": "Mathematics Cheat Sheet for Quantitative Ecology",
+    "section": "Linear Algebra - Eigenvalues and Eigenvectors",
+    "text": "Linear Algebra - Eigenvalues and Eigenvectors"
+  },
+  {
+    "objectID": "stock_assess/TMB_convergence.html",
+    "href": "stock_assess/TMB_convergence.html",
+    "title": "TMB Model Convergence",
     "section": "",
-    "text": "test"
+    "text": "This example is using RTMB, which uses similar R functions as TMB.\nSay you construct an objective function called obj. Here, f is the model function and par contains a list of initial parameter values.\npar &lt;- list(x = 1,\n            y = 2,\n            sd = 0.5)\nf &lt;- function(par) {\n    return(jnll)\n}\nobj &lt;- MakeADFun(func = f, parameters = par)\nIf you’re creating a new function, you should check if the model will run before running an optmizer. If there are no errors in the code, no warning messages will pop up. However, this doesn’t always mean that the model will function. This is because the model formulation or parameterization may be incorrect. You can check this by checking if a likelihood and gradient function will give values:\n# check likelihood function\nobj$fn()\n# check gradient function\nobj$gr()\nIf the model is estimable, it will calculate a likelihood based on the initial parameters. Each parameter should also provide a gradient. If the gradient of a parameter = 0, this means that the model will not estimate that parameter or the parameter is not being used in the model.\nIf the checks on obj are successful, then you can run it with an optimizer. Here is an example using nlminb and opt is the output:\nopt &lt;- nlminb(obj$par, obj$gr, obj$gr)\nWarning messages of “NA/NaN function evaluation” may pop out, but this does not always mean the model is not converged. This means that within an iteration, a parameter estimate has a NA/NaN. You will need to check this. You may need to change the parameterization (e.g., transform parameter to log space). You can check the parameter estimation at each evaluation by running obj$env$tracepar &lt;- TRUE before running the optimizer.\nNote: This will print every parameter at each evaluation and take longer.\nobj &lt;- MakeADFun(func = f, parameters = par)\nobj$env$tracepar &lt;- TRUE\nopt &lt;- nlminb(obj$par, obj$gr, obj$gr)"
+  },
+  {
+    "objectID": "stock_assess/TMB_convergence.html#convergence-criteria",
+    "href": "stock_assess/TMB_convergence.html#convergence-criteria",
+    "title": "TMB Model Convergence",
+    "section": "Convergence criteria",
+    "text": "Convergence criteria\nThe model is considered converged if:\n\nConvergence message = 0 and have good convergence message(s).\nMaximum gradient &lt; 1e-3.\nHessian is invertible.\nParameters are identifable.\nStandard errors for model estimates are reasonable.\nFit to data\n\nFor the model to be considered “converged”, it is crucial to follow each test step consecutively. If at any point a step/test fails, please refrain from proceeding to the next step or test."
+  },
+  {
+    "objectID": "stock_assess/TMB_convergence.html#convergence-messages",
+    "href": "stock_assess/TMB_convergence.html#convergence-messages",
+    "title": "TMB Model Convergence",
+    "section": "1. Convergence messages",
+    "text": "1. Convergence messages\n\n# look if the model is converged and well estimated\nopt$convergence\nopt$message\n\nIf the model is considered converged, opt$convergence = 0. If the model did not converge, opt$convergence = 1. There can be several reasons why the model failed to converge:\n\nsingular convergence: model is likely overparameterized (too complex for data).\nfalse convergence: likelihood may be discontinuous\nrelative convergence but Hessian not positive definite = singularity\n\nSome of these convergence issues can be solved by fixing some parameters. Check which parameters are not estimating well. It is recommended to fix one parameter at a time.\nNote: the parameter with the highest gradient isn’t always the one you should fix first."
+  },
+  {
+    "objectID": "stock_assess/TMB_convergence.html#gradients",
+    "href": "stock_assess/TMB_convergence.html#gradients",
+    "title": "TMB Model Convergence",
+    "section": "2. Gradients",
+    "text": "2. Gradients\nGradient is the vector of derivtives of the negative log likelihood function with respect to each parameter.\n\nprovides information about the direction and magnitude of the steepest increase in the negative log likelihood function.\nIn maximum likelihood, you use gradient ascent\n\nupdate the parameter estimates in the direcction of the gradient to move towards the maximum likelihood values.\noptimizer adjusts parameter values iteratively based on gradient information until convergence is reached and a maximum likelihood estimate is obtained\n\n\nThe typical threshold for the gradient is 1e-3, meaning that a converged model will have a maximum gradient &lt; 1e-3. If the absolute of the maximum gradient is too high (&gt; 1e-3), it indicates that parameter values are far from the optimal values that maximize the objective function. You can check the maximum gradient:\n\n# grab gradients of each parameter\nfinal_gradient &lt;- obj$gr(opt$par)\n# maximum gradient below 1e-3?\nmax(abs(final_gradient))"
+  },
+  {
+    "objectID": "stock_assess/TMB_convergence.html#invertible-hessian",
+    "href": "stock_assess/TMB_convergence.html#invertible-hessian",
+    "title": "TMB Model Convergence",
+    "section": "3. Invertible Hessian",
+    "text": "3. Invertible Hessian\nThe Hessian will not be invertible if the negative log likelihood is not a true maximum. Inverting the negative Hessian gives us the covariance matrix, which is why this needs to be invertible. This usually occurs when the model is mis-specified, which could mean either the parameters are too confounded or overparameterized (i.e., too complex for data). RTMB will warn about uninvertible Hessians with NaNs in the gradient or estimation of standard deviations for parameter estimates.\nYou can obtain the Hessian matrix using:\n\n# no random effects\nfixed_obj &lt;- obj$env$last.par.best\n# remove parameters that are random effects\nif(length(obj$env$random &gt; 0)) {\n    fixed_obj &lt;- obj$env$last.par.best[-c(obj$env$random)]\n}\n# Hessian\nHess &lt;- optimHess(par = fixed_obj, fn = obj$fn, gr = obj$gr)\n# are there any NaNs?\nis.nan(max(Hess))\n\nIf there are NaNs, you will need to check if the parameters are identifiable."
+  },
+  {
+    "objectID": "stock_assess/TMB_convergence.html#identifiable-parameters",
+    "href": "stock_assess/TMB_convergence.html#identifiable-parameters",
+    "title": "TMB Model Convergence",
+    "section": "4. Identifiable parameters",
+    "text": "4. Identifiable parameters\nParameters are considered identifiable if the model can uniquely determine the values of the parameters from the observed data. A model is identifiable if different sets of parameter values lead to different probaility distributions for the observed data.\nThis is evaluated using eigenvalues. Eigenvalues are related to identifiability through their connection to the rank of matrices, especially the design matrix in linear models. The design matrix relates the observations to the model parameters. If the design matrix has full rank, all eigenvalues are non-zero and it implies that each parameter is uniquely estimable from the data.\nIf parameters are not identifiable, the hessian (and standard error) cannot be estimated for that parameter and the model has failed to converge. The model will require adjustments or constraints to ensure meaningful parameter estimates. Sometimes, fixing the non-identifiable parameter improves the model run.\n\neigen_test &lt;- eigen(Hess)\nwhichbad_eigen &lt;- which(eigen_tes$values &lt; sqrt(.Machine$double.eps))\n# this will provide a data frame with parameter estimates\n# which tell if parameters are identifiable (\"Ok\") or not (\"Bad\")\nif(length(eigen_test$vectors[,whichbad_eigen]) &gt; 0) {\n    rowmax = apply(as.matrix(eigen_test$vectors[, whichbag_eigen]),\n            MARGIN = 1, FUN = function(x){ max(abs(x)) })\n    eigen_mat &lt;- data.frame(\n        \"Parameters\" = names(obj$par),\n        \"MLE\" = fixed_obj,\n        \"Parameter_check\" = ifelse(rowmax &lt; 0.001, \"Bad\", \"Ok\")\n    )\n}\n\nWarning: This check should only be conducted if the gradients met the threshold."
+  },
+  {
+    "objectID": "stock_assess/TMB_convergence.html#standard-errors",
+    "href": "stock_assess/TMB_convergence.html#standard-errors",
+    "title": "TMB Model Convergence",
+    "section": "5. Standard errors",
+    "text": "5. Standard errors\nIf the standard errors for the parameter estimates are high, it suggests that the estimates are not very precise (i.e., large amount of uncertainty). This can mean:\n\nLow precision: there could be a wide range of plausible values for the parameters\nLack of stability in estimation\nPotential identifiability issues\nOverfitting: model may be too complex and is capturing noise in the data rather than true underlying patterns\n\nThis does not stop the model run, but considerations should be made to check the parameter estimates and rerun the model if the standard errors are unreasonable.\n\nsdrep &lt;- sdreport(obj)\nsummary(sdrep)"
+  },
+  {
+    "objectID": "stock_assess/TMB_convergence.html#fit-to-data",
+    "href": "stock_assess/TMB_convergence.html#fit-to-data",
+    "title": "TMB Model Convergence",
+    "section": "6. Fit to data",
+    "text": "6. Fit to data\nIf the model has passed all the convergence checks, you need to check if the model fits well with the data, which will help determine if the model structure is correct. Model can compile, run, and pass convergence tests even if the model structure is incorrect."
+  },
+  {
+    "objectID": "stock_assess/TMB_convergence.html#link-to-r-function",
+    "href": "stock_assess/TMB_convergence.html#link-to-r-function",
+    "title": "TMB Model Convergence",
+    "section": "Link to R function",
+    "text": "Link to R function\nI have a R function that does these checks for a RTMB model with the objective function and optimizer output (from nlminb). This does not fit the model results to data: check_RTMB_model"
   },
   {
     "objectID": "stock_assess/agecomp_ll.html#stock-recruitment-functions",
@@ -49,18 +147,18 @@
     "text": "Conversion to compensation ratio"
   },
   {
-    "objectID": "num_meths/num_meths.html",
-    "href": "num_meths/num_meths.html",
-    "title": "Quantitative Fisheries Notes",
+    "objectID": "num_meths/Newton.html",
+    "href": "num_meths/Newton.html",
+    "title": "Newton-Raphson Method",
     "section": "",
-    "text": "Topic\n\n\n\n\nNotes\n\n\n\n\nCode\n\n\n\n\nAdditional References\n\n\n\n\n\n\n\n\nNewton-Raphson Method\n\n\n\n\n📖\n\n\n\n\n🖥️\n\n\n\n\nXX\n\n\n\n\n\n\n\n\n\n\n📖\n\n\n\n\n🖥️"
+    "text": "Newton-Raphson method is an iterative numerical technique used to finding approximate solutions to equations.\nThis is used to solve equations of the form \\(f(x) = 0\\) where \\(f(x)\\) is a real-valued function of a real variable.\nGiven an initial guess (\\(x_0\\)), the method iteratively refines this guess to get closer and closer to a root of the equation."
   },
   {
     "objectID": "num_meths/Newton.html#newton-raphson-description",
     "href": "num_meths/Newton.html#newton-raphson-description",
     "title": "Newton-Raphson Method",
-    "section": "Newton-Raphson description",
-    "text": "Newton-Raphson description\n\nNewton-Raphson method is an iterative numerical technique used to finding approximate solutions to equations.\nThis is used to solve equations of the form \\(f(x) = 0\\) where \\(f(x)\\) is a real-valued function of a real variable.\nGiven an initial guess (\\(x_0\\)), the method iteratively refines this guess to get closer and closer to a root of the equation."
+    "section": "",
+    "text": "Newton-Raphson method is an iterative numerical technique used to finding approximate solutions to equations.\nThis is used to solve equations of the form \\(f(x) = 0\\) where \\(f(x)\\) is a real-valued function of a real variable.\nGiven an initial guess (\\(x_0\\)), the method iteratively refines this guess to get closer and closer to a root of the equation."
   },
   {
     "objectID": "num_meths/Newton.html#formula",
@@ -70,45 +168,122 @@
     "text": "Formula\n\nThe core formula for the Newton-Raphson methods is: \\[\nx_{n+1} = x_n-\\dfrac{f(x_n)}{(f^\\prime x_n)}\n\\]\n\nwhere:\n\n\\(x_{n+1}\\) is the next approximation of the root\n\\(x_n\\) is the current approximation of the root\n\\(f(x_n)\\) is the value of the function at \\(x_n\\)\n\\(f^\\prime x_n\\) is the derivative (slope) of the function at \\(x_n\\)"
   },
   {
-    "objectID": "stock_assess/equili_recruit.html#stock-recruitment-functions",
-    "href": "stock_assess/equili_recruit.html#stock-recruitment-functions",
-    "title": "Equilibrium Recruitment",
-    "section": "Stock-recruitment functions",
-    "text": "Stock-recruitment functions\nStock-recruitment functions describe the production of new recruits to a fish population and the dependence of that production on the spawning component of the population."
+    "objectID": "num_meths/num_meths.html",
+    "href": "num_meths/num_meths.html",
+    "title": "Numerical Methods",
+    "section": "",
+    "text": "Topic\nSub-topic\nNotes\nCode\nAdditional References\n\n\n\n\n\nNewton-Raphson Method\n📖\n🖥️\nXX\n\n\n\n\n📖\n🖥️"
   },
   {
-    "objectID": "stock_assess/equili_recruit.html#definitions",
-    "href": "stock_assess/equili_recruit.html#definitions",
-    "title": "Equilibrium Recruitment",
+    "objectID": "stock_assess/recruitment_basics.html",
+    "href": "stock_assess/recruitment_basics.html",
+    "title": "Understanding Stock-Recruitment",
+    "section": "",
+    "text": "Stock-recruitment functions describe the production of new recruits to a fish population and the dependence of that production on the spawning component of the population."
+  },
+  {
+    "objectID": "stock_assess/recruitment_basics.html#stock-recruitment-functions",
+    "href": "stock_assess/recruitment_basics.html#stock-recruitment-functions",
+    "title": "Understanding Stock-Recruitment",
+    "section": "",
+    "text": "Stock-recruitment functions describe the production of new recruits to a fish population and the dependence of that production on the spawning component of the population."
+  },
+  {
+    "objectID": "stock_assess/recruitment_basics.html#beverton-holt",
+    "href": "stock_assess/recruitment_basics.html#beverton-holt",
+    "title": "Understanding Stock-Recruitment",
+    "section": "Beverton-Holt",
+    "text": "Beverton-Holt"
+  },
+  {
+    "objectID": "stock_assess/recruitment_basics.html#ricker",
+    "href": "stock_assess/recruitment_basics.html#ricker",
+    "title": "Understanding Stock-Recruitment",
+    "section": "Ricker",
+    "text": "Ricker"
+  },
+  {
+    "objectID": "stock_assess/recruitment_basics.html#what-is-steepness",
+    "href": "stock_assess/recruitment_basics.html#what-is-steepness",
+    "title": "Understanding Stock-Recruitment",
+    "section": "What is steepness?",
+    "text": "What is steepness?\n“the fraction of recruitment from a virgin population obtained when the spawner are at 20% of the virgin level”"
+  },
+  {
+    "objectID": "stock_assess/recruitment_basics.html#equilibrium-recruitment",
+    "href": "stock_assess/recruitment_basics.html#equilibrium-recruitment",
+    "title": "Understanding Stock-Recruitment",
+    "section": "Equilibrium recruitment",
+    "text": "Equilibrium recruitment"
+  },
+  {
+    "objectID": "stock_assess/recruitment_basics.html#definitions",
+    "href": "stock_assess/recruitment_basics.html#definitions",
+    "title": "Understanding Stock-Recruitment",
     "section": "Definitions",
-    "text": "Definitions\n\n\\(R_0\\): virgin, unfished recruitment\n\\(SBPR_0\\): virgin, unfished spawning biomass per recruit\n\\(SSB_0\\): virgin unfished spawning biomass\n\\(SBPR_F\\) biomass per recruit at \\(F \\neq 0\\)\n\\(YPR_F\\): yield per recruit at \\(F \\neq 0\\)\n\\(CR\\): compensation ratio\n\\(h\\): steepness\n\\(SRR\\): stock-recruitment relationship"
+    "text": "Definitions\n\n\\(R_0\\): virgin, unfished recruitment\n\\(\\Phi_0\\): virgin, unfished spawning biomass per recruit\n\\(S_{0}\\): virgin unfished spawning biomass\n\\(\\Phi_F\\) biomass per recruit at \\(F \\neq 0\\)\n\\(YPR_F\\): yield per recruit at \\(F \\neq 0\\)\n\\(CR\\): compensation ratio\n\\(h\\): steepness\n\\(SRR\\): stock-recruitment relationship"
   },
   {
-    "objectID": "stock_assess/equili_recruit.html#ypr-quantities-at-various-fishing-mortalities",
-    "href": "stock_assess/equili_recruit.html#ypr-quantities-at-various-fishing-mortalities",
-    "title": "Equilibrium Recruitment",
+    "objectID": "stock_assess/recruitment_basics.html#ypr-quantities-at-various-fishing-mortalities",
+    "href": "stock_assess/recruitment_basics.html#ypr-quantities-at-various-fishing-mortalities",
+    "title": "Understanding Stock-Recruitment",
     "section": "YPR quantities at various fishing mortalities",
     "text": "YPR quantities at various fishing mortalities\nFind \\(SBPR\\) and \\(YPR\\) at the \\(F\\) value of interest and calculate these values when \\(F = 0\\). This will vary depending on your model:\n\\[\nY P R=\\Sigma_{a} F s_{a} N_{a} w_{a}\n\\]\n\n\\(N_a\\) is a proportional expected numbers-at-age\n\\(w_a\\) is the expected weight-at-age\n\\(s_a\\) is fishery selectivity"
   },
   {
-    "objectID": "stock_assess/equili_recruit.html#ypr-quantities-at-various-fishing-mortalities-1",
-    "href": "stock_assess/equili_recruit.html#ypr-quantities-at-various-fishing-mortalities-1",
-    "title": "Equilibrium Recruitment",
+    "objectID": "stock_assess/recruitment_basics.html#ypr-quantities-at-various-fishing-mortalities-1",
+    "href": "stock_assess/recruitment_basics.html#ypr-quantities-at-various-fishing-mortalities-1",
+    "title": "Understanding Stock-Recruitment",
     "section": "YPR quantities at various fishing mortalities",
     "text": "YPR quantities at various fishing mortalities\n\\[\nSBPR = \\sum_a E_a N_a w_a\n\\]\n\n\\(E_a\\): some measure of population’s fecundity at age\nthe resulting \\(SBPR\\) is going to vary with \\(F\\) because \\(N_a\\) will decline faster when \\(F\\) is greater than zero."
   },
   {
-    "objectID": "stock_assess/equili_recruit.html#beverton-holt---srr-in-terms-of-sbpr",
-    "href": "stock_assess/equili_recruit.html#beverton-holt---srr-in-terms-of-sbpr",
-    "title": "Equilibrium Recruitment",
+    "objectID": "stock_assess/recruitment_basics.html#beverton-holt---srr-in-terms-of-sbpr",
+    "href": "stock_assess/recruitment_basics.html#beverton-holt---srr-in-terms-of-sbpr",
+    "title": "Understanding Stock-Recruitment",
     "section": "Beverton-Holt - SRR in terms of \\(SBPR\\)",
     "text": "Beverton-Holt - SRR in terms of \\(SBPR\\)"
   },
   {
-    "objectID": "stock_assess/equili_recruit.html#conversion-to-compensation-ratio",
-    "href": "stock_assess/equili_recruit.html#conversion-to-compensation-ratio",
-    "title": "Equilibrium Recruitment",
+    "objectID": "stock_assess/recruitment_basics.html#beverton-holt-function-in-terms-of-steepness",
+    "href": "stock_assess/recruitment_basics.html#beverton-holt-function-in-terms-of-steepness",
+    "title": "Understanding Stock-Recruitment",
+    "section": "Beverton-Holt function in terms of steepness",
+    "text": "Beverton-Holt function in terms of steepness\nsteepness as a function of proportion \\(p\\) of unfished spawning stock size \\(S_0\\) and \\(\\alpha\\) and the unexploited spawning biomass per recruit \\(\\Phi_0\\)\n\\[\nh(p) = \\dfrac{R(S= pS_0)}{R(S=S_0)} = p \\dfrac{1+\\beta S_0}{1_p \\beta S_0} = p \\dfrac{1 + \\beta \\Phi_0 R_0}{1 + p \\beta \\Phi_0 R_0}\n\\]"
+  },
+  {
+    "objectID": "stock_assess/recruitment_basics.html#beverton-holt-function-in-terms-of-steepness-1",
+    "href": "stock_assess/recruitment_basics.html#beverton-holt-function-in-terms-of-steepness-1",
+    "title": "Understanding Stock-Recruitment",
+    "section": "Beverton-Holt function in terms of steepness",
+    "text": "Beverton-Holt function in terms of steepness\nTo complete the steepness transformation of the SRR, we must define unexploited recruitment and unexploited spawning biomass per recruit"
+  },
+  {
+    "objectID": "stock_assess/recruitment_basics.html#ricker-function-in-terms-of-steepness",
+    "href": "stock_assess/recruitment_basics.html#ricker-function-in-terms-of-steepness",
+    "title": "Understanding Stock-Recruitment",
+    "section": "Ricker function in terms of steepness",
+    "text": "Ricker function in terms of steepness\nsteepness as a function of proportion \\(p\\) of unfished spawning stock size \\(S_0\\) and \\(\\alpha\\) and the unexploited spawning biomass per recruit \\(\\Phi_0\\)"
+  },
+  {
+    "objectID": "stock_assess/recruitment_basics.html#conversion-to-compensation-ratio",
+    "href": "stock_assess/recruitment_basics.html#conversion-to-compensation-ratio",
+    "title": "Understanding Stock-Recruitment",
     "section": "Conversion to compensation ratio",
     "text": "Conversion to compensation ratio"
+  },
+  {
+    "objectID": "stock_assess/stock_assess_home.html",
+    "href": "stock_assess/stock_assess_home.html",
+    "title": "Stock Assesssment Notes",
+    "section": "",
+    "text": "Topic\nSub-topic\nNotes\nCode\nAdditional References\n\n\n\n\nRecruitment\nUnderstanding Stock Recruitment\n📖\n🖥️\n- Miller, T.J. and Brooks, E.N., 2021. Steepness is a slippery slope. Fish and Fisheries, 22(3), pp 634-645.\n\n\n\n\n📖\n🖥️\n\n\n\nModel Diagnostics\nTMB Model Convergence\n📖\n🖥️"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Quantitative Fisheries Notes",
+    "section": "",
+    "text": "test"
   }
 ]

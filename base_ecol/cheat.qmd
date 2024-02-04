@@ -1,0 +1,38 @@
+---
+title: "Mathematics Cheat Sheet for Quantitative Ecology"
+format: 
+  revealjs: 
+    multiplex: true
+    transition: fade
+    slide-number: true
+editor: source
+---
+
+## Exponents and Logarithms
+
+### Properties of Exponentials
+
+$$ 
+x^ax^b = x^{a+b} \\
+\dfrac{x^a}{x^b} = x^{a-b} \\
+x^a = e^{a log(x)} \\
+(x^{a})^b = x^{ab} \\
+x^{-a} = \dfrac{1}{x^a} 
+$$
+
+## Exponents and Logarithms
+
+### Properties of Logarithms
+$$
+log(x^a) = a log(x) \\
+log(ab) = log(a) + log(b) \\
+log\left(\dfrac{a}{b}\right) = log(a) - log(b)
+$$
+
+## Calculus - Derivatives
+
+## Calculus - Integrals
+
+## Linear Algebra - Matrix Math
+
+## Linear Algebra - Eigenvalues and Eigenvectors

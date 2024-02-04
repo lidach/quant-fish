@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Quantitative Fisheries Notes - TMB Model Convergence</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Quantitative Fisheries Notes</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../num_meths/num_meths.html" rel="" target="">
+ <span class="menu-text">Numerical Methods</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../stock_assess/stock_assess_home.html" rel="" target="">
+ <span class="menu-text">Stock Assessment</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#convergence-criteria" id="toc-convergence-criteria" class="nav-link active" data-scroll-target="#convergence-criteria">Convergence criteria</a></li>
+  <li><a href="#convergence-messages" id="toc-convergence-messages" class="nav-link" data-scroll-target="#convergence-messages">1. Convergence messages</a></li>
+  <li><a href="#gradients" id="toc-gradients" class="nav-link" data-scroll-target="#gradients">2. Gradients</a></li>
+  <li><a href="#invertible-hessian" id="toc-invertible-hessian" class="nav-link" data-scroll-target="#invertible-hessian">3. Invertible Hessian</a></li>
+  <li><a href="#identifiable-parameters" id="toc-identifiable-parameters" class="nav-link" data-scroll-target="#identifiable-parameters">4. Identifiable parameters</a></li>
+  <li><a href="#standard-errors" id="toc-standard-errors" class="nav-link" data-scroll-target="#standard-errors">5. Standard errors</a></li>
+  <li><a href="#fit-to-data" id="toc-fit-to-data" class="nav-link" data-scroll-target="#fit-to-data">6. Fit to data</a></li>
+  <li><a href="#link-to-r-function" id="toc-link-to-r-function" class="nav-link" data-scroll-target="#link-to-r-function">Link to R function</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">TMB Model Convergence</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>This example is using <code>RTMB</code>, which uses similar R functions as <code>TMB</code>.</p>
+<p>Say you construct an objective function called <em>obj</em>. Here, <em>f</em> is the model function and <em>par</em> contains a list of initial parameter values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>par <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="dv">1</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> <span class="dv">2</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(par) {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(jnll)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(<span class="at">func =</span> f, <span class="at">parameters =</span> par)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you’re creating a new function, you should check if the model will run before running an optmizer. If there are no errors in the code, no warning messages will pop up. However, this doesn’t always mean that the model will function. This is because the model formulation or parameterization may be incorrect. You can check this by checking if a likelihood and gradient function will give values:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check likelihood function</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>obj<span class="sc">$</span><span class="fu">fn</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># check gradient function</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>obj<span class="sc">$</span><span class="fu">gr</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If the model is estimable, it will calculate a likelihood based on the initial parameters. Each parameter should also provide a gradient. If the gradient of a parameter = 0, this means that the model will not estimate that parameter or the parameter is not being used in the model.</p>
+<p>If the checks on <em>obj</em> are successful, then you can run it with an optimizer. Here is an example using <code>nlminb</code> and <em>opt</em> is the output:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>opt <span class="ot">&lt;-</span> <span class="fu">nlminb</span>(obj<span class="sc">$</span>par, obj<span class="sc">$</span>gr, obj<span class="sc">$</span>gr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Warning messages of “<em>NA/NaN function evaluation</em>” may pop out, but this does not always mean the model is not converged. This means that within an iteration, a parameter estimate has a NA/NaN. You will need to check this. You may need to change the parameterization (e.g., transform parameter to log space). You can check the parameter estimation at each evaluation by running <code>obj$env$tracepar &lt;- TRUE</code> before running the optimizer.</p>
+<p><em>Note</em>: This will print every parameter at each evaluation and take longer.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(<span class="at">func =</span> f, <span class="at">parameters =</span> par)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>obj<span class="sc">$</span>env<span class="sc">$</span>tracepar <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>opt <span class="ot">&lt;-</span> <span class="fu">nlminb</span>(obj<span class="sc">$</span>par, obj<span class="sc">$</span>gr, obj<span class="sc">$</span>gr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="convergence-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="convergence-criteria">Convergence criteria</h2>
+<p>The model is considered converged if:</p>
+<ol type="1">
+<li>Convergence message = 0 and have good convergence message(s).</li>
+<li>Maximum gradient &lt; 1e-3.</li>
+<li>Hessian is invertible.</li>
+<li>Parameters are identifable.</li>
+<li>Standard errors for model estimates are reasonable.</li>
+<li>Fit to data</li>
+</ol>
+<p>For the model to be considered “converged”, it is crucial to follow each test step consecutively. If at any point a step/test fails, please refrain from proceeding to the next step or test.</p>
+</section>
+<section id="convergence-messages" class="level2">
+<h2 class="anchored" data-anchor-id="convergence-messages">1. Convergence messages</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look if the model is converged and well estimated</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>opt<span class="sc">$</span>convergence</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>opt<span class="sc">$</span>message</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If the model is considered converged, <code>opt$convergence = 0</code>. If the model did not converge, <code>opt$convergence = 1</code>. There can be several reasons why the model failed to converge:</p>
+<ul>
+<li>singular convergence: model is likely overparameterized (too complex for data).</li>
+<li>false convergence: likelihood may be discontinuous</li>
+<li>relative convergence but Hessian not positive definite = singularity</li>
+</ul>
+<p>Some of these convergence issues can be solved by fixing some parameters. Check which parameters are not estimating well. It is recommended to fix one parameter at a time.</p>
+<p><em>Note</em>: the parameter with the highest gradient isn’t always the one you should fix first.</p>
+</section>
+<section id="gradients" class="level2">
+<h2 class="anchored" data-anchor-id="gradients">2. Gradients</h2>
+<p>Gradient is the vector of derivtives of the negative log likelihood function with respect to each parameter.</p>
+<ul>
+<li>provides information about the direction and magnitude of the steepest increase in the negative log likelihood function.</li>
+<li>In maximum likelihood, you use gradient ascent
+<ul>
+<li>update the parameter estimates in the direcction of the gradient to move towards the maximum likelihood values.</li>
+<li>optimizer adjusts parameter values iteratively based on gradient information until convergence is reached and a maximum likelihood estimate is obtained</li>
+</ul></li>
+</ul>
+<p>The typical threshold for the gradient is <strong>1e-3</strong>, meaning that a converged model will have a maximum gradient &lt; 1e-3. If the absolute of the maximum gradient is too high (&gt; 1e-3), it indicates that parameter values are far from the optimal values that maximize the objective function. You can check the maximum gradient:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># grab gradients of each parameter</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>final_gradient <span class="ot">&lt;-</span> obj<span class="sc">$</span><span class="fu">gr</span>(opt<span class="sc">$</span>par)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># maximum gradient below 1e-3?</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">abs</span>(final_gradient))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="invertible-hessian" class="level2">
+<h2 class="anchored" data-anchor-id="invertible-hessian">3. Invertible Hessian</h2>
+<p>The Hessian will not be invertible if the negative log likelihood is not a true maximum. Inverting the negative Hessian gives us the covariance matrix, which is why this needs to be invertible. This usually occurs when the model is mis-specified, which could mean either the parameters are too confounded or overparameterized (i.e., too complex for data). RTMB will warn about uninvertible Hessians with NaNs in the gradient or estimation of standard deviations for parameter estimates.</p>
+<p>You can obtain the Hessian matrix using:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># no random effects</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fixed_obj <span class="ot">&lt;-</span> obj<span class="sc">$</span>env<span class="sc">$</span>last.par.best</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># remove parameters that are random effects</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">length</span>(obj<span class="sc">$</span>env<span class="sc">$</span>random <span class="sc">&gt;</span> <span class="dv">0</span>)) {</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    fixed_obj <span class="ot">&lt;-</span> obj<span class="sc">$</span>env<span class="sc">$</span>last.par.best[<span class="sc">-</span><span class="fu">c</span>(obj<span class="sc">$</span>env<span class="sc">$</span>random)]</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Hessian</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>Hess <span class="ot">&lt;-</span> <span class="fu">optimHess</span>(<span class="at">par =</span> fixed_obj, <span class="at">fn =</span> obj<span class="sc">$</span>fn, <span class="at">gr =</span> obj<span class="sc">$</span>gr)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># are there any NaNs?</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">is.nan</span>(<span class="fu">max</span>(Hess))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If there are NaNs, you will need to check if the parameters are identifiable.</p>
+</section>
+<section id="identifiable-parameters" class="level2">
+<h2 class="anchored" data-anchor-id="identifiable-parameters">4. Identifiable parameters</h2>
+<p>Parameters are considered identifiable if the model can uniquely determine the values of the parameters from the observed data. A model is identifiable if different sets of parameter values lead to different probaility distributions for the observed data.</p>
+<p>This is evaluated using eigenvalues. Eigenvalues are related to identifiability through their connection to the rank of matrices, especially the design matrix in linear models. The design matrix relates the observations to the model parameters. If the design matrix has full rank, all eigenvalues are non-zero and it implies that each parameter is uniquely estimable from the data.</p>
+<p>If parameters are not identifiable, the hessian (and standard error) cannot be estimated for that parameter and the model has failed to converge. The model will require adjustments or constraints to ensure meaningful parameter estimates. Sometimes, fixing the non-identifiable parameter improves the model run.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>eigen_test <span class="ot">&lt;-</span> <span class="fu">eigen</span>(Hess)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>whichbad_eigen <span class="ot">&lt;-</span> <span class="fu">which</span>(eigen_tes<span class="sc">$</span>values <span class="sc">&lt;</span> <span class="fu">sqrt</span>(.Machine<span class="sc">$</span>double.eps))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this will provide a data frame with parameter estimates</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># which tell if parameters are identifiable ("Ok") or not ("Bad")</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">length</span>(eigen_test<span class="sc">$</span>vectors[,whichbad_eigen]) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    rowmax <span class="ot">=</span> <span class="fu">apply</span>(<span class="fu">as.matrix</span>(eigen_test<span class="sc">$</span>vectors[, whichbag_eigen]),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">MARGIN =</span> <span class="dv">1</span>, <span class="at">FUN =</span> <span class="cf">function</span>(x){ <span class="fu">max</span>(<span class="fu">abs</span>(x)) })</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    eigen_mat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Parameters"</span> <span class="ot">=</span> <span class="fu">names</span>(obj<span class="sc">$</span>par),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"MLE"</span> <span class="ot">=</span> fixed_obj,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Parameter_check"</span> <span class="ot">=</span> <span class="fu">ifelse</span>(rowmax <span class="sc">&lt;</span> <span class="fl">0.001</span>, <span class="st">"Bad"</span>, <span class="st">"Ok"</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><em>Warning</em>: This check should only be conducted if the gradients met the threshold.</p>
+</section>
+<section id="standard-errors" class="level2">
+<h2 class="anchored" data-anchor-id="standard-errors">5. Standard errors</h2>
+<p>If the standard errors for the parameter estimates are high, it suggests that the estimates are not very precise (i.e., large amount of uncertainty). This can mean:</p>
+<ul>
+<li>Low precision: there could be a wide range of plausible values for the parameters</li>
+<li>Lack of stability in estimation</li>
+<li>Potential identifiability issues</li>
+<li>Overfitting: model may be too complex and is capturing noise in the data rather than true underlying patterns</li>
+</ul>
+<p>This does not stop the model run, but considerations should be made to check the parameter estimates and rerun the model if the standard errors are unreasonable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sdrep <span class="ot">&lt;-</span> <span class="fu">sdreport</span>(obj)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sdrep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fit-to-data" class="level2">
+<h2 class="anchored" data-anchor-id="fit-to-data">6. Fit to data</h2>
+<p>If the model has passed all the convergence checks, you need to check if the model fits well with the data, which will help determine if the model structure is correct. Model can compile, run, and pass convergence tests even if the model structure is incorrect.</p>
+</section>
+<section id="link-to-r-function" class="level2">
+<h2 class="anchored" data-anchor-id="link-to-r-function">Link to R function</h2>
+<p>I have a R function that does these checks for a RTMB model with the objective function and optimizer output (from <code>nlminb</code>). This does not fit the model results to data: <a href="https://github.com/lidach/addtools/blob/main/R/check_RTMB_model.r">check_RTMB_model</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,12 +1,12 @@
 ---
 title: "Newton-Raphson Method"
-format: 
-  revealjs: 
-    multiplex: true
-    transition: fade
-    slide-number: true
-editor: source
+format:
+  html:
+    toc: true
+    page-layout: full
+editor: visual
 ---
+
 
 ## Newton-Raphson description
 - Newton-Raphson method is an iterative numerical technique used to finding approximate solutions to equations. 
