@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quantitative Fisheries Notes - Understanding Recruitment</title>
+<title>Quantitative Fisheries Notes - Likelihoods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -112,13 +112,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#recruitment" id="toc-recruitment" class="nav-link active" data-scroll-target="#recruitment">Recruitment</a></li>
-  <li><a href="#deep-dive-into-origin-of-stock-recruitment-relationship" id="toc-deep-dive-into-origin-of-stock-recruitment-relationship" class="nav-link" data-scroll-target="#deep-dive-into-origin-of-stock-recruitment-relationship">Deep dive into origin of stock-recruitment relationship</a>
+  <li><a href="#likelihoods" id="toc-likelihoods" class="nav-link active" data-scroll-target="#likelihoods">Likelihoods</a></li>
+  <li><a href="#age-composition" id="toc-age-composition" class="nav-link" data-scroll-target="#age-composition">Age composition</a>
   <ul class="collapse">
-  <li><a href="#derivations" id="toc-derivations" class="nav-link" data-scroll-target="#derivations">Derivations</a></li>
+  <li><a href="#univariate-numbers-at-age" id="toc-univariate-numbers-at-age" class="nav-link" data-scroll-target="#univariate-numbers-at-age">Univariate numbers-at-age</a></li>
+  <li><a href="#multivariate-numbers-at-age" id="toc-multivariate-numbers-at-age" class="nav-link" data-scroll-target="#multivariate-numbers-at-age">Multivariate numbers-at-age</a></li>
+  <li><a href="#proportions-at-age" id="toc-proportions-at-age" class="nav-link" data-scroll-target="#proportions-at-age">Proportions-at-age</a></li>
+  <li><a href="#summary-of-age-composition-likelihoods" id="toc-summary-of-age-composition-likelihoods" class="nav-link" data-scroll-target="#summary-of-age-composition-likelihoods">Summary of age composition likelihoods</a></li>
   </ul></li>
-  <li><a href="#what-is-steepness" id="toc-what-is-steepness" class="nav-link" data-scroll-target="#what-is-steepness">What is steepness?</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -127,7 +128,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Understanding Recruitment</h1>
+<h1 class="title">Likelihoods</h1>
 </div>
 
 
@@ -142,96 +143,218 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Notes based on:</p>
+<section id="likelihoods" class="level2">
+<h2 class="anchored" data-anchor-id="likelihoods">Likelihoods</h2>
+<p>The main types of data integrated within stock assesments include annual removals (total catch from a fishery), abundance indices, and distributions of length and/or ages in the catches (i.e., composition data). Abundance indices and composition data often derive from fisheries and research surveys (i.e., fishery-dependent and fishery independent).</p>
+<p>These data provide critical information on</p>
 <ul>
-<li><p>Camp, E., Collins, A. B., Ahrens, R. N., &amp; Lorenzen, K. (2020). <a href="https://edis.ifas.ufl.edu/fa222">Fish population recruitment: what recruitment means and why it matters</a>: FA222, 3/2020. EDIS, 2020(2), 6-6.</p></li>
-<li><p>Miller, T.J. and Brooks, E.N., 2021. <a href="https://doi.org/10.1111/faf.12534">Steepness is a slippery slope</a>. Fish and Fisheries, 22(3), pp 634-645.</p></li>
+<li>relative year-class strength</li>
+<li>mortality</li>
+<li>selectivity</li>
 </ul>
-<section id="recruitment" class="level2">
-<h2 class="anchored" data-anchor-id="recruitment">Recruitment</h2>
-<p><strong>Recruitment</strong> refers to the act of young fish transitioning between two stages of life. What is important here is what happens <em>before</em> and <em>after</em> this transition, which is when the rate at which fish die from natural mortality does not depend on the density of fish (i.e., density-independent mortality). This means that survival of an individual fish is not influenced by the number of other fish within the population. In the <em>before</em> stage, fish begin life as a fertilized egg that hatches into a larval fish. Mortality for egg and larval stages are considered density-independent because environmentally-driven variability in mortality tends to be strongest in this stage.</p>
-<p>Eventually, they settle into habitat or aggregrate into schools. This settlement phase is where most scientists think mortality begins to be density-dependent (Walters and Juanes, 1993). During this transitional period (i.e., the recruitment period), the natural mortality does depend on the density of fish (i.e., density-dependent mortality). This means that mortaltiy will decrease (and survival will increase) with decreasing density of fish. This is based on the idea that resources during this period are limited and decreased densities reduce competition for food, space, and refuge (Walters and Juanes 1993). Fish that survive the density-dependent mortality recruitment stage are referred to as <em>recruits</em>. As fish grow in size through the recruitment period, they become less vulnerable to predators and grow large enough that density-dependent mortality ceases. This is the <em>after</em> stage.</p>
-<p>In the context of stock assessment, we need to estimate recruitment that reproduce the observed catch and match survey trends and age composition. We also need to forecast recruitment to provide advice on future stock trajectory and catch advice.</p>
 </section>
-<section id="deep-dive-into-origin-of-stock-recruitment-relationship" class="level2">
-<h2 class="anchored" data-anchor-id="deep-dive-into-origin-of-stock-recruitment-relationship">Deep dive into origin of stock-recruitment relationship</h2>
-<p><strong>Stock-recruitment</strong> functions describe the production of new recruits to a fish population and the dependence of that production on the spawning component of the population. It captures the effects of environmental variability, however it does not model the underlying biological processes. You cannot have recruitment without spawners (Myers and Barrowman, 1996) and recruitment cannot increase without bounds. Stock-recruitment functions pass through the origin and exhibit some form of density dependence.</p>
-<p>Beverton and Holt (1957) found that spawning stock is generally a poor predictor of recruitment (i.e., recruitment being independent of abundance) except at relatively low stock sizes. <em>However, this does not mean there is no stock-recruit relationship</em>. There is still a link between spawning biomass and recruits (note, not a predictor); the number of eggs spawned depends on the mature component of the stock. The average survival rate from egg to recruitment decreases with increasing spawning stock size. When there is low amount of eggs, the survival rate is greater. This is all as a result of density dependent and competition where is there is a decrease in juvenile survival with increasing abundance. This refers to one of the most commonly assumed forms of the stock-recruitment function: the <strong>Beverton-Holt</strong> (Beverton and Holt 1957).In the Beverton-Holt function, recruitment is a function of spawning biomass <span class="math inline">\(S\)</span> that increases towards an asymptotic value with increased spawning biomass. Density dependence pertains to coexisting pre-recruits (e.g., through competition).</p>
-<p>Another common recruitment function is the <strong>Ricker</strong> (1954). For the Ricker function, recruitment is an asymmetric dome-shaped function of spawning biomass <span class="math inline">\(S\)</span>. Density dependence pertains to spawning biomass (e.g., through cannibalism, competition, predation).</p>
-<section id="derivations" class="level3">
-<h3 class="anchored" data-anchor-id="derivations">Derivations</h3>
-<p>In the original derivations, the units of spawning stock was eggs. The Beverton-Holt is derived as:</p>
-<p><span class="math display">\[
-R_{t + a_r} = \dfrac{E_t e^{-M_I a_r}}{1 + \dfrac{M_D}{M_I} (1-e^{-M_I a_r}) E_t}
-\]</span></p>
+<section id="age-composition" class="level2">
+<h2 class="anchored" data-anchor-id="age-composition">Age composition</h2>
+<p>Age-based stock assessments can be modeled into two classes depending on the data</p>
 <ul>
-<li><span class="math inline">\(a_r\)</span>: age of recruitment</li>
-<li><span class="math inline">\(E_t\)</span>: number of eggs spawned at time t</li>
-<li><span class="math inline">\(M_D\)</span>: instantaneous density-dependent mortality rate</li>
-<li><span class="math inline">\(M_I\)</span>: instantaneous density-independent mortality rate</li>
+<li>Numbers-at-age</li>
+<li>Proportions-at-age</li>
 </ul>
-<p>For Ricker, the mature stock is expressed in terms of the initial number of eggs laid (Ricker 1954). Thus, the function is:</p>
+<section id="univariate-numbers-at-age" class="level3">
+<h3 class="anchored" data-anchor-id="univariate-numbers-at-age">Univariate numbers-at-age</h3>
+<section id="lognormal-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="lognormal-distribution">Lognormal distribution</h4>
+<ul>
+<li><span class="math inline">\(x &gt; 0\)</span> is the observed catch (or survey index) at a given age</li>
+<li><span class="math inline">\(\mu &gt; 0\)</span> is the calculated catch at that age (or survey index)</li>
+<li><span class="math inline">\(\sigma &gt; 0\)</span> is a scale parameter</li>
+</ul>
 <p><span class="math display">\[
-R_{t+a_r} = E_t e^{-(M_I + M_E E_t)a_r}
+f(x ; \mu, \sigma)=\frac{1}{\sqrt{2 \pi \sigma^{2}}} \exp \left\{\frac{-[\log (x)-\log (\mu)]^{2}}{2 \sigma^{2}}\right\} x^{-1}
 \]</span></p>
 <ul>
-<li><span class="math inline">\(M_E\)</span>: represent density-dependent mortality that is proportional to the initial number of eggs <span class="math inline">\(E_t\)</span></li>
+<li>mean: <span class="math inline">\(\mu exp({\sigma^2}/2)\)</span></li>
+<li>median: <span class="math inline">\(\mu\)</span></li>
+<li>variance: <span class="math inline">\((exp(\sigma^2)-1) exp[2log(\mu) + \sigma^2]\)</span></li>
 </ul>
-<p>It is more commeon to reparameterize these functions in terms of spawning biomass because the number of eggs produced is usually unknown. This is how it’s done:</p>
+</section>
+<section id="gamma-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="gamma-distribution">Gamma distribution</h4>
+<ul>
+<li><span class="math inline">\(x &gt; 0\)</span> is the observed catch (or survey index) at a given age</li>
+<li><span class="math inline">\(\mu &gt; 0\)</span> is the calculated catch at that age (or survey index)</li>
+<li><span class="math inline">\(\sigma &gt; 0\)</span> is a scale parameter</li>
+</ul>
 <p><span class="math display">\[
-E_t = \sum_a f_{t,a} m_{t,a} w_{t,a} N_{t,a}
+f(x ; \mu, \sigma)=\frac{1}{\Gamma(\sigma)\left(\frac{\mu}{\sigma}\right)^{\sigma}} x^{\sigma-1} \exp (-x \sigma / \mu)
 \]</span></p>
 <ul>
-<li><span class="math inline">\(f_{t,a}\)</span>: relative feduncity (eggs per unit mass)</li>
-<li><span class="math inline">\(m_{t,a}\)</span>: maturity at age</li>
-<li><span class="math inline">\(w_{t,a}\)</span>: weight at age</li>
-<li><span class="math inline">\(N_{t,a}\)</span>: abundance at age</li>
+<li>mean: <span class="math inline">\(\mu\)</span></li>
+<li>variance: <span class="math inline">\(\mu^2/\sigma\)</span></li>
 </ul>
-<p>Relative fecundity is assumed to be invariant to mass or age, so that:</p>
+</section>
+<section id="generalized-gamma-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="generalized-gamma-distribution">Generalized gamma distribution</h4>
+<ul>
+<li><span class="math inline">\(x &gt; 0\)</span> is the observed catch (or survey index) at a given age</li>
+<li><span class="math inline">\(\mu &gt; 0\)</span> is the calculated catch at that age (or survey index)</li>
+<li><span class="math inline">\(\sigma &gt; 0\)</span> is a scale parameter</li>
+<li><span class="math inline">\(\tau \in \mathbb{R}\)</span> is a shape parameter</li>
+</ul>
 <p><span class="math display">\[
-E_t = f \sum_a m_{t,a} w_{t,a} N_{t,a} = f S_t
+f_{3}(x ; \mu, \sigma, \tau)=\left\{\begin{array}{ll}
+\left.|\tau|\left(\tau^{-2}\right)^{\tau^{-2}} \exp \left(\tau^{-2}\left\{\tau \frac{\log (x)-\log (\mu)}{\sigma}-\exp \left[\tau \frac{\log (x)-\log (\mu)}{\sigma}\right]\right\}\right) \right\rvert\,\left[\sigma x \Gamma\left(\tau^{-2}\right)\right], &amp; \tau \neq 0 \\
+(2 \pi)^{-1 / 2} \exp \left\{-\frac{[\log (x)-\log (\mu)]^{2}}{2 \sigma^{2}}\right\}(\sigma x)^{-1}, &amp; \tau=0
+\end{array}\right
 \]</span></p>
-<p>This allows total egg production to be proportional to spawning biomass <span class="math inline">\(S_t\)</span>.</p>
-<p>This transform the Beverton-Holt function to:</p>
-<p><span class="math display">\[
-R_{t+a_r} = \dfrac{\alpha S_t}{1 + \beta S_t}
-\]</span></p>
-<p>where</p>
-<p><span class="math display">\[
-\alpha = f e^{-M_I a_r}
-\]</span></p>
-<p>and</p>
-<p><span class="math display">\[
-\beta = f \dfrac{M_D}{M_I} (1-e^{-M_I a_r}) = \dfrac{M_D}{M_I}(f-\alpha)
-\]</span></p>
-<p><span class="math inline">\(\alpha\)</span> is proportional to the fraction surviving the pre-recruit stage from density-independent mortality, and it is the rate of recruitment when <span class="math inline">\(S_t=0\)</span>. In other words, <span class="math inline">\(\alpha\)</span> is the maximum average survival rate absent of density effects. <span class="math inline">\(\beta\)</span> is a “scaling” parameter that includes density-dependent and -independent mortality components. Note that <span class="math inline">\(\beta\)</span> is a function of <span class="math inline">\(\alpha\)</span>.</p>
-<p>Ricker function of spawning biomass is:</p>
-<p><span class="math display">\[
-R_{t+a_r} = \alpha S_t e^{-\beta_E S_t}
-\]</span></p>
-<p>where</p>
-<p><span class="math display">\[
-\alpha = f e^{-M_I a_r}
-\]</span></p>
-<p>and</p>
-<p><span class="math display">\[
-\beta_E = f M_E a_r
-\]</span></p>
-<p>The <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta_E\)</span> terms are independent, unlike in the Beverton-Holt (aside from them being a function of the age at recruitment and relative fecundity).</p>
+</section>
+<section id="normal-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="normal-distribution">Normal distribution</h4>
+</section>
+<section id="truncated-normal-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="truncated-normal-distribution">Truncated normal distribution</h4>
+</section>
+<section id="students-t-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="students-t-distribution">Student’s t distribution</h4>
 </section>
 </section>
-<section id="what-is-steepness" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-steepness">What is steepness?</h2>
-<p>“the fraction of recruitment from a virgin population obtained when the spawner are at 20% of the virgin level”</p>
+<section id="multivariate-numbers-at-age" class="level3">
+<h3 class="anchored" data-anchor-id="multivariate-numbers-at-age">Multivariate numbers-at-age</h3>
+<section id="multivariate-lognormal" class="level4">
+<h4 class="anchored" data-anchor-id="multivariate-lognormal">Multivariate lognormal</h4>
 </section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<p>Beverton, R. J. H., &amp; Holt, S. J. (1957). On the dynamics of exploited fish populations. Chapman and Hall, London, Fish and Fisheries Series No.&nbsp;11, fascimile reprint 1993.</p>
-<p>Myers, R. A., &amp; Barrowman, N. J. (1996). Is fish recruitment related to spawner abundance? Fishery Bulletin, 94(4), 707–724.</p>
-<p>Ricker, W. E. (1975). Computation and interpretation of biological statistics of fish populations. Bulletin of the Fisheries Research Board of Canada, Number 119, 382 p.</p>
-<p>Walters, C. J., &amp; Juanes, F. (1993). Recruitment limitation as a consequence of natural selection for use of restricted feeding habitats and predation risk taking by juvenile fishes. Canadian Journal of Fisheries and Aquatic Sciences, 50(10), 2058-2070.</p>
+</section>
+<section id="proportions-at-age" class="level3">
+<h3 class="anchored" data-anchor-id="proportions-at-age">Proportions-at-age</h3>
+<section id="multinomial" class="level4">
+<h4 class="anchored" data-anchor-id="multinomial">Multinomial</h4>
+</section>
+<section id="additive-logistic-normal-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="additive-logistic-normal-distribution">Additive logistic-normal distribution</h4>
+</section>
+<section id="multiplicative-logistic-normal-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="multiplicative-logistic-normal-distribution">Multiplicative logistic-normal distribution</h4>
+</section>
+<section id="dirichlet-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="dirichlet-distribution">Dirichlet distribution</h4>
+</section>
+</section>
+<section id="summary-of-age-composition-likelihoods" class="level3">
+<h3 class="anchored" data-anchor-id="summary-of-age-composition-likelihoods">Summary of age composition likelihoods</h3>
+<table class="table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 24%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 26%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Distribution</th>
+<th>Class</th>
+<th>Allows Zeros</th>
+<th>Baranov</th>
+<th>Number of estimated observation parameters</th>
+<th>Estimated correlation parameter?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Lognormal</td>
+<td>univariate numbers-at-age</td>
+<td>no</td>
+<td>median</td>
+<td>1 per age per fleet</td>
+<td>no</td>
+</tr>
+<tr class="even">
+<td>Gamma</td>
+<td>univariate numbers-at-age</td>
+<td>some</td>
+<td>mean</td>
+<td>1 per age per fleet</td>
+<td>no</td>
+</tr>
+<tr class="odd">
+<td>Generalized gamma</td>
+<td>univariate numbers-at-age</td>
+<td>some</td>
+<td>location</td>
+<td>2 per age per fleet</td>
+<td>no</td>
+</tr>
+<tr class="even">
+<td>Normal</td>
+<td>univariate numbers-at-age</td>
+<td>yes</td>
+<td>mean</td>
+<td>1 per age per fleet</td>
+<td>no</td>
+</tr>
+<tr class="odd">
+<td>Left truncated normal</td>
+<td>univariate numbers-at-age</td>
+<td>yes</td>
+<td>location</td>
+<td>1 per age per fleet</td>
+<td>no</td>
+</tr>
+<tr class="even">
+<td>log-Student’s t</td>
+<td>univariate numbers-at-age</td>
+<td>no</td>
+<td>location</td>
+<td>2 per age per fleet</td>
+<td>no</td>
+</tr>
+<tr class="odd">
+<td>Multivariate lognormal</td>
+<td>multivariate numbers-at-age</td>
+<td>no</td>
+<td>median</td>
+<td>1 per age per fleet and 1 additional per fleet</td>
+<td>yes</td>
+</tr>
+<tr class="even">
+<td>Multinomial</td>
+<td>proportions-at-age total numbers/total mass</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Additive logistic normal</td>
+<td>proportions-at-age total numbers/total mass</td>
+<td>no</td>
+<td>location</td>
+<td>1 per age per fleet and 1 additional per fleet</td>
+<td>yes</td>
+</tr>
+<tr class="even">
+<td>Multiplicative logistic normal</td>
+<td>proportions-at-age total numbers/total mass</td>
+<td>no</td>
+<td>location</td>
+<td>1 per age per fleet and 1 additional per fleet</td>
+<td>yes</td>
+</tr>
+<tr class="odd">
+<td>Dirichlet</td>
+<td>proportions-at-age total numbers/total mass</td>
+<td>no</td>
+<td>mean</td>
+<td>1 per fleet</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+<p>** table based on Table 1 in Albertsen et al., <a href="https://doi.org/10.1139/cjfas-2015-0532">2017</a></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

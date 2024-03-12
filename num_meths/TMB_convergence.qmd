@@ -4,6 +4,7 @@ format:
   html:
     toc: true
     page-layout: full
+    css: styles.css
 editor: visual
 ---
 
@@ -34,7 +35,7 @@ obj$fn()
 obj$gr()
 ```
 
-If the model is estimable, it will calculate a likelihood based on the initial parameters. Each parameter should also provide a gradient. If the gradient of a parameter = 0, this means that the model will not estimate that parameter or the parameter is not being used in the model. 
+If the model is estimable, it will calculate a likelihood based on the initial parameters. Each parameter should also provide a gradient. If the gradient of a parameter = 0, this means that the model will not estimate that parameter or the parameter is not being used in the model.
 
 If the checks on *obj* are successful, then you can run it with an optimizer. Here is an example using `nlminb` and *opt* is the output:
 
@@ -42,7 +43,7 @@ If the checks on *obj* are successful, then you can run it with an optimizer. He
 opt <- nlminb(obj$par, obj$gr, obj$gr)
 ```
 
-Warning messages of "*NA/NaN function evaluation*" may pop out, but this does not always mean the model is not converged. This means that within an iteration, a parameter estimate has a NA/NaN. You will need to check this. You may need to change the parameterization (e.g., transform parameter to log space). You can check the parameter estimation at each evaluation by running `obj$env$tracepar <- TRUE` before running the optimizer. 
+Warning messages of "*NA/NaN function evaluation*" may pop out, but this does not always mean the model is not converged. This means that within an iteration, a parameter estimate has a NA/NaN. You will need to check this. You may need to change the parameterization (e.g., transform parameter to log space). You can check the parameter estimation at each evaluation by running `obj$env$tracepar <- TRUE` before running the optimizer.
 
 *Note*: This will print every parameter at each evaluation and take longer.
 
@@ -66,6 +67,7 @@ The model is considered converged if:
 For the model to be considered "converged", it is crucial to follow each test step consecutively. If at any point a step/test fails, please refrain from proceeding to the next step or test.
 
 ## 1. Convergence messages
+
 ```{r, eval = FALSE}
 # look if the model is converged and well estimated
 opt$convergence
@@ -84,14 +86,14 @@ Some of these convergence issues can be solved by fixing some parameters. Check 
 
 ## 2. Gradients
 
-Gradient is the vector of derivtives of the negative log likelihood function with respect to each parameter. 
+Gradient is the vector of derivatives of the negative log likelihood function with respect to each parameter.
 
-- provides information about the direction and magnitude of the steepest increase in the negative log likelihood function. 
-- In maximum likelihood, you use gradient ascent
-    - update the parameter estimates in the direcction of the gradient to move towards the maximum likelihood values.
-    - optimizer adjusts parameter values iteratively based on gradient information until convergence is reached and a maximum likelihood estimate is obtained
+-   provides information about the direction and magnitude of the steepest increase in the negative log likelihood function.
+-   In maximum likelihood, you use gradient ascent
+    -   update the parameter estimates in the direction of the gradient to move towards the maximum likelihood values.
+    -   optimizer adjusts parameter values iteratively based on gradient information until convergence is reached and a maximum likelihood estimate is obtained
 
-The typical threshold for the gradient is **1e-3**, meaning that a converged model will have a maximum gradient < 1e-3. If the absolute of the maximum gradient is too high (\> 1e-3), it indicates that parameter values are far from the optimal values that maximize the objective function. You can check the maximum gradient:
+The typical threshold for the gradient is **1e-3**, meaning that a converged model will have a maximum gradient \< 1e-3. If the absolute of the maximum gradient is too high (\> 1e-3), it indicates that parameter values are far from the optimal values that maximize the objective function. You can check the maximum gradient:
 
 ```{r, eval = FALSE}
 # grab gradients of each parameter
@@ -102,7 +104,7 @@ max(abs(final_gradient))
 
 ## 3. Invertible Hessian
 
-The Hessian will not be invertible if the negative log likelihood is not a true maximum. Inverting the negative Hessian gives us the covariance matrix, which is why this needs to be invertible. This usually occurs when the model is mis-specified, which could mean either the parameters are too confounded or overparameterized (i.e., too complex for data). RTMB will warn about uninvertible Hessians with NaNs in the gradient or estimation of standard deviations for parameter estimates. 
+The Hessian will not be invertible if the negative log likelihood is not a true maximum. Inverting the negative Hessian gives us the covariance matrix, which is why this needs to be invertible. This usually occurs when the model is mis-specified, which could mean either the parameters are too confounded or overparameterized (i.e., too complex for data). RTMB will warn about uninvertible Hessians with NaNs in the gradient or estimation of standard deviations for parameter estimates.
 
 You can obtain the Hessian matrix using:
 
@@ -123,15 +125,15 @@ If there are NaNs, you will need to check if the parameters are identifiable.
 
 ## 4. Identifiable parameters
 
-Parameters are considered identifiable if the model can uniquely determine the values of the parameters from the observed data. A model is identifiable if different sets of parameter values lead to different probaility distributions for the observed data. 
+Parameters are considered identifiable if the model can uniquely determine the values of the parameters from the observed data. A model is identifiable if different sets of parameter values lead to different probability distributions for the observed data.
 
-This is evaluated using eigenvalues. Eigenvalues are related to identifiability through their connection to the rank of matrices, especially the design matrix in linear models. The design matrix relates the observations to the model parameters. If the design matrix has full rank, all eigenvalues are non-zero and it implies that each parameter is uniquely estimable from the data. 
+This is evaluated using eigenvalues. Eigenvalues are related to identifiability through their connection to the rank of matrices, especially the design matrix in linear models. The design matrix relates the observations to the model parameters. If the design matrix has full rank, all eigenvalues are non-zero and it implies that each parameter is uniquely estimable from the data.
 
-If parameters are not identifiable, the hessian (and standard error) cannot be estimated for that parameter and the model has failed to converge. The model will require adjustments or constraints to ensure meaningful parameter estimates. Sometimes, fixing the non-identifiable parameter improves the model run. 
+If parameters are not identifiable, the hessian (and standard error) cannot be estimated for that parameter and the model has failed to converge. The model will require adjustments or constraints to ensure meaningful parameter estimates. Sometimes, fixing the non-identifiable parameter improves the model run.
 
 ```{r, eval = FALSE}
 eigen_test <- eigen(Hess)
-whichbad_eigen <- which(eigen_tes$values < sqrt(.Machine$double.eps))
+whichbad_eigen <- which(eigen_test$values < sqrt(.Machine$double.eps))
 # this will provide a data frame with parameter estimates
 # which tell if parameters are identifiable ("Ok") or not ("Bad")
 if(length(eigen_test$vectors[,whichbad_eigen]) > 0) {
@@ -145,16 +147,16 @@ if(length(eigen_test$vectors[,whichbad_eigen]) > 0) {
 }
 ```
 
-*Warning*: This check should only be conducted if the gradients met the threshold. 
+*Warning*: This check should only be conducted if the gradients meet the threshold.
 
 ## 5. Standard errors
 
-If the standard errors for the parameter estimates are high, it suggests that the estimates are not very precise (i.e., large amount of uncertainty). This can mean:
+If the standard errors for the parameter estimates are high, it suggests that model is not fully converged. This can mean:
 
-- Low precision: there could be a wide range of plausible values for the parameters
-- Lack of stability in estimation
-- Potential identifiability issues
-- Overfitting: model may be too complex and is capturing noise in the data rather than true underlying patterns
+-   Low precision: there could be a wide range of plausible values for the parameters
+-   Lack of stability in estimation
+-   Potential identifiability issues
+-   Overfitting: model may be too complex and is capturing noise in the data rather than true underlying patterns
 
 This does not stop the model run, but considerations should be made to check the parameter estimates and rerun the model if the standard errors are unreasonable.
 
@@ -169,4 +171,4 @@ If the model has passed all the convergence checks, you need to check if the mod
 
 ## Link to R function
 
-I have a R function that does these checks for a RTMB model with the objective function and optimizer output (from `nlminb`). This does not fit the model results to data: [check_RTMB_model](https://github.com/lidach/addtools/blob/main/R/check_RTMB_model.r)
+I have a R function that does these checks for a RTMB model with the objective function and optimizer output (from `nlminb`). This does not check the standard deviations or fit the model results to data: [check_RTMB_model](https://github.com/lidach/addtools/blob/main/R/check_RTMB_model.r)

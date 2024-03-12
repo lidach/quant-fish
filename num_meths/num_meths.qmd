@@ -1,9 +1,10 @@
 ---
 title: "Numerical Methods"
-tbl-colwidths: [20,20,10,10,40]
+tbl-colwidths: [40,50,10,10]
 ---
 
-| Topic | Sub-topic | Notes |  Code  | Additional References |
+| Topic | Sub-topic | Notes |  Code |
 |:-:|:-:|:-:|:-:|:-:|
-| | Newton-Raphson Method | [📖](/num_meths/Newton.html) | [🖥️]() |          XX           |
-| |                       |            [📖]()            | [🖥️]() |                       |
+| | Newton-Raphson Method | [📖](/num_meths/Newton.html) | [🖥️]() |
+| Model Diagnostics | TMB Model Convergence | [📖](/num_meths/TMB_convergence.html) | [🖥️]() | 
+| | Model validation | [📖]() | [🖥️]() | 

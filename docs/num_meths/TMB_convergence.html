@@ -96,6 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -235,12 +236,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="gradients" class="level2">
 <h2 class="anchored" data-anchor-id="gradients">2. Gradients</h2>
-<p>Gradient is the vector of derivtives of the negative log likelihood function with respect to each parameter.</p>
+<p>Gradient is the vector of derivatives of the negative log likelihood function with respect to each parameter.</p>
 <ul>
 <li>provides information about the direction and magnitude of the steepest increase in the negative log likelihood function.</li>
 <li>In maximum likelihood, you use gradient ascent
 <ul>
-<li>update the parameter estimates in the direcction of the gradient to move towards the maximum likelihood values.</li>
+<li>update the parameter estimates in the direction of the gradient to move towards the maximum likelihood values.</li>
 <li>optimizer adjusts parameter values iteratively based on gradient information until convergence is reached and a maximum likelihood estimate is obtained</li>
 </ul></li>
 </ul>
@@ -272,12 +273,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="identifiable-parameters" class="level2">
 <h2 class="anchored" data-anchor-id="identifiable-parameters">4. Identifiable parameters</h2>
-<p>Parameters are considered identifiable if the model can uniquely determine the values of the parameters from the observed data. A model is identifiable if different sets of parameter values lead to different probaility distributions for the observed data.</p>
+<p>Parameters are considered identifiable if the model can uniquely determine the values of the parameters from the observed data. A model is identifiable if different sets of parameter values lead to different probability distributions for the observed data.</p>
 <p>This is evaluated using eigenvalues. Eigenvalues are related to identifiability through their connection to the rank of matrices, especially the design matrix in linear models. The design matrix relates the observations to the model parameters. If the design matrix has full rank, all eigenvalues are non-zero and it implies that each parameter is uniquely estimable from the data.</p>
 <p>If parameters are not identifiable, the hessian (and standard error) cannot be estimated for that parameter and the model has failed to converge. The model will require adjustments or constraints to ensure meaningful parameter estimates. Sometimes, fixing the non-identifiable parameter improves the model run.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>eigen_test <span class="ot">&lt;-</span> <span class="fu">eigen</span>(Hess)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>whichbad_eigen <span class="ot">&lt;-</span> <span class="fu">which</span>(eigen_tes<span class="sc">$</span>values <span class="sc">&lt;</span> <span class="fu">sqrt</span>(.Machine<span class="sc">$</span>double.eps))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>whichbad_eigen <span class="ot">&lt;-</span> <span class="fu">which</span>(eigen_test<span class="sc">$</span>values <span class="sc">&lt;</span> <span class="fu">sqrt</span>(.Machine<span class="sc">$</span>double.eps))</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this will provide a data frame with parameter estimates</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># which tell if parameters are identifiable ("Ok") or not ("Bad")</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">length</span>(eigen_test<span class="sc">$</span>vectors[,whichbad_eigen]) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
@@ -290,11 +291,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><em>Warning</em>: This check should only be conducted if the gradients met the threshold.</p>
+<p><em>Warning</em>: This check should only be conducted if the gradients meet the threshold.</p>
 </section>
 <section id="standard-errors" class="level2">
 <h2 class="anchored" data-anchor-id="standard-errors">5. Standard errors</h2>
-<p>If the standard errors for the parameter estimates are high, it suggests that the estimates are not very precise (i.e., large amount of uncertainty). This can mean:</p>
+<p>If the standard errors for the parameter estimates are high, it suggests that model is not fully converged. This can mean:</p>
 <ul>
 <li>Low precision: there could be a wide range of plausible values for the parameters</li>
 <li>Lack of stability in estimation</li>
@@ -313,7 +314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="link-to-r-function" class="level2">
 <h2 class="anchored" data-anchor-id="link-to-r-function">Link to R function</h2>
-<p>I have a R function that does these checks for a RTMB model with the objective function and optimizer output (from <code>nlminb</code>). This does not fit the model results to data: <a href="https://github.com/lidach/addtools/blob/main/R/check_RTMB_model.r">check_RTMB_model</a></p>
+<p>I have a R function that does these checks for a RTMB model with the objective function and optimizer output (from <code>nlminb</code>). This does not check the standard deviations or fit the model results to data: <a href="https://github.com/lidach/addtools/blob/main/R/check_RTMB_model.r">check_RTMB_model</a></p>
 
 
 </section>

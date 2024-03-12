@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quantitative Fisheries Notes - Understanding Recruitment</title>
+<title>Quantitative Fisheries Notes - Ecological optimization: i.e., harvest control rules 101</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,8 +60,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="styles.css">
@@ -107,27 +105,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#recruitment" id="toc-recruitment" class="nav-link active" data-scroll-target="#recruitment">Recruitment</a></li>
-  <li><a href="#deep-dive-into-origin-of-stock-recruitment-relationship" id="toc-deep-dive-into-origin-of-stock-recruitment-relationship" class="nav-link" data-scroll-target="#deep-dive-into-origin-of-stock-recruitment-relationship">Deep dive into origin of stock-recruitment relationship</a>
-  <ul class="collapse">
-  <li><a href="#derivations" id="toc-derivations" class="nav-link" data-scroll-target="#derivations">Derivations</a></li>
-  </ul></li>
-  <li><a href="#what-is-steepness" id="toc-what-is-steepness" class="nav-link" data-scroll-target="#what-is-steepness">What is steepness?</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Understanding Recruitment</h1>
+<h1 class="title">Ecological optimization: i.e., harvest control rules 101</h1>
 </div>
 
 
@@ -142,97 +128,9 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Notes based on:</p>
-<ul>
-<li><p>Camp, E., Collins, A. B., Ahrens, R. N., &amp; Lorenzen, K. (2020). <a href="https://edis.ifas.ufl.edu/fa222">Fish population recruitment: what recruitment means and why it matters</a>: FA222, 3/2020. EDIS, 2020(2), 6-6.</p></li>
-<li><p>Miller, T.J. and Brooks, E.N., 2021. <a href="https://doi.org/10.1111/faf.12534">Steepness is a slippery slope</a>. Fish and Fisheries, 22(3), pp 634-645.</p></li>
-</ul>
-<section id="recruitment" class="level2">
-<h2 class="anchored" data-anchor-id="recruitment">Recruitment</h2>
-<p><strong>Recruitment</strong> refers to the act of young fish transitioning between two stages of life. What is important here is what happens <em>before</em> and <em>after</em> this transition, which is when the rate at which fish die from natural mortality does not depend on the density of fish (i.e., density-independent mortality). This means that survival of an individual fish is not influenced by the number of other fish within the population. In the <em>before</em> stage, fish begin life as a fertilized egg that hatches into a larval fish. Mortality for egg and larval stages are considered density-independent because environmentally-driven variability in mortality tends to be strongest in this stage.</p>
-<p>Eventually, they settle into habitat or aggregrate into schools. This settlement phase is where most scientists think mortality begins to be density-dependent (Walters and Juanes, 1993). During this transitional period (i.e., the recruitment period), the natural mortality does depend on the density of fish (i.e., density-dependent mortality). This means that mortaltiy will decrease (and survival will increase) with decreasing density of fish. This is based on the idea that resources during this period are limited and decreased densities reduce competition for food, space, and refuge (Walters and Juanes 1993). Fish that survive the density-dependent mortality recruitment stage are referred to as <em>recruits</em>. As fish grow in size through the recruitment period, they become less vulnerable to predators and grow large enough that density-dependent mortality ceases. This is the <em>after</em> stage.</p>
-<p>In the context of stock assessment, we need to estimate recruitment that reproduce the observed catch and match survey trends and age composition. We also need to forecast recruitment to provide advice on future stock trajectory and catch advice.</p>
-</section>
-<section id="deep-dive-into-origin-of-stock-recruitment-relationship" class="level2">
-<h2 class="anchored" data-anchor-id="deep-dive-into-origin-of-stock-recruitment-relationship">Deep dive into origin of stock-recruitment relationship</h2>
-<p><strong>Stock-recruitment</strong> functions describe the production of new recruits to a fish population and the dependence of that production on the spawning component of the population. It captures the effects of environmental variability, however it does not model the underlying biological processes. You cannot have recruitment without spawners (Myers and Barrowman, 1996) and recruitment cannot increase without bounds. Stock-recruitment functions pass through the origin and exhibit some form of density dependence.</p>
-<p>Beverton and Holt (1957) found that spawning stock is generally a poor predictor of recruitment (i.e., recruitment being independent of abundance) except at relatively low stock sizes. <em>However, this does not mean there is no stock-recruit relationship</em>. There is still a link between spawning biomass and recruits (note, not a predictor); the number of eggs spawned depends on the mature component of the stock. The average survival rate from egg to recruitment decreases with increasing spawning stock size. When there is low amount of eggs, the survival rate is greater. This is all as a result of density dependent and competition where is there is a decrease in juvenile survival with increasing abundance. This refers to one of the most commonly assumed forms of the stock-recruitment function: the <strong>Beverton-Holt</strong> (Beverton and Holt 1957).In the Beverton-Holt function, recruitment is a function of spawning biomass <span class="math inline">\(S\)</span> that increases towards an asymptotic value with increased spawning biomass. Density dependence pertains to coexisting pre-recruits (e.g., through competition).</p>
-<p>Another common recruitment function is the <strong>Ricker</strong> (1954). For the Ricker function, recruitment is an asymmetric dome-shaped function of spawning biomass <span class="math inline">\(S\)</span>. Density dependence pertains to spawning biomass (e.g., through cannibalism, competition, predation).</p>
-<section id="derivations" class="level3">
-<h3 class="anchored" data-anchor-id="derivations">Derivations</h3>
-<p>In the original derivations, the units of spawning stock was eggs. The Beverton-Holt is derived as:</p>
-<p><span class="math display">\[
-R_{t + a_r} = \dfrac{E_t e^{-M_I a_r}}{1 + \dfrac{M_D}{M_I} (1-e^{-M_I a_r}) E_t}
-\]</span></p>
-<ul>
-<li><span class="math inline">\(a_r\)</span>: age of recruitment</li>
-<li><span class="math inline">\(E_t\)</span>: number of eggs spawned at time t</li>
-<li><span class="math inline">\(M_D\)</span>: instantaneous density-dependent mortality rate</li>
-<li><span class="math inline">\(M_I\)</span>: instantaneous density-independent mortality rate</li>
-</ul>
-<p>For Ricker, the mature stock is expressed in terms of the initial number of eggs laid (Ricker 1954). Thus, the function is:</p>
-<p><span class="math display">\[
-R_{t+a_r} = E_t e^{-(M_I + M_E E_t)a_r}
-\]</span></p>
-<ul>
-<li><span class="math inline">\(M_E\)</span>: represent density-dependent mortality that is proportional to the initial number of eggs <span class="math inline">\(E_t\)</span></li>
-</ul>
-<p>It is more commeon to reparameterize these functions in terms of spawning biomass because the number of eggs produced is usually unknown. This is how it’s done:</p>
-<p><span class="math display">\[
-E_t = \sum_a f_{t,a} m_{t,a} w_{t,a} N_{t,a}
-\]</span></p>
-<ul>
-<li><span class="math inline">\(f_{t,a}\)</span>: relative feduncity (eggs per unit mass)</li>
-<li><span class="math inline">\(m_{t,a}\)</span>: maturity at age</li>
-<li><span class="math inline">\(w_{t,a}\)</span>: weight at age</li>
-<li><span class="math inline">\(N_{t,a}\)</span>: abundance at age</li>
-</ul>
-<p>Relative fecundity is assumed to be invariant to mass or age, so that:</p>
-<p><span class="math display">\[
-E_t = f \sum_a m_{t,a} w_{t,a} N_{t,a} = f S_t
-\]</span></p>
-<p>This allows total egg production to be proportional to spawning biomass <span class="math inline">\(S_t\)</span>.</p>
-<p>This transform the Beverton-Holt function to:</p>
-<p><span class="math display">\[
-R_{t+a_r} = \dfrac{\alpha S_t}{1 + \beta S_t}
-\]</span></p>
-<p>where</p>
-<p><span class="math display">\[
-\alpha = f e^{-M_I a_r}
-\]</span></p>
-<p>and</p>
-<p><span class="math display">\[
-\beta = f \dfrac{M_D}{M_I} (1-e^{-M_I a_r}) = \dfrac{M_D}{M_I}(f-\alpha)
-\]</span></p>
-<p><span class="math inline">\(\alpha\)</span> is proportional to the fraction surviving the pre-recruit stage from density-independent mortality, and it is the rate of recruitment when <span class="math inline">\(S_t=0\)</span>. In other words, <span class="math inline">\(\alpha\)</span> is the maximum average survival rate absent of density effects. <span class="math inline">\(\beta\)</span> is a “scaling” parameter that includes density-dependent and -independent mortality components. Note that <span class="math inline">\(\beta\)</span> is a function of <span class="math inline">\(\alpha\)</span>.</p>
-<p>Ricker function of spawning biomass is:</p>
-<p><span class="math display">\[
-R_{t+a_r} = \alpha S_t e^{-\beta_E S_t}
-\]</span></p>
-<p>where</p>
-<p><span class="math display">\[
-\alpha = f e^{-M_I a_r}
-\]</span></p>
-<p>and</p>
-<p><span class="math display">\[
-\beta_E = f M_E a_r
-\]</span></p>
-<p>The <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta_E\)</span> terms are independent, unlike in the Beverton-Holt (aside from them being a function of the age at recruitment and relative fecundity).</p>
-</section>
-</section>
-<section id="what-is-steepness" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-steepness">What is steepness?</h2>
-<p>“the fraction of recruitment from a virgin population obtained when the spawner are at 20% of the virgin level”</p>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<p>Beverton, R. J. H., &amp; Holt, S. J. (1957). On the dynamics of exploited fish populations. Chapman and Hall, London, Fish and Fisheries Series No.&nbsp;11, fascimile reprint 1993.</p>
-<p>Myers, R. A., &amp; Barrowman, N. J. (1996). Is fish recruitment related to spawner abundance? Fishery Bulletin, 94(4), 707–724.</p>
-<p>Ricker, W. E. (1975). Computation and interpretation of biological statistics of fish populations. Bulletin of the Fisheries Research Board of Canada, Number 119, 382 p.</p>
-<p>Walters, C. J., &amp; Juanes, F. (1993). Recruitment limitation as a consequence of natural selection for use of restricted feeding habitats and predation risk taking by juvenile fishes. Canadian Journal of Fisheries and Aquatic Sciences, 50(10), 2058-2070.</p>
+<p>Optimization methods are used to find the best fishing strategy given 1) specified objective, 2) a model of stock dynamics, and 3) specified management alternatives.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

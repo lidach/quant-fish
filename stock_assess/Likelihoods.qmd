@@ -1,0 +1,105 @@
+---
+title: "Likelihoods"
+format:
+  html:
+    toc: true
+    page-layout: full
+    css: styles.css
+editor: visual
+---
+
+## Likelihoods
+
+The main types of data integrated within stock assesments include annual removals (total catch from a fishery), abundance indices, and distributions of length and/or ages in the catches (i.e., composition data). Abundance indices and composition data often derive from fisheries and research surveys (i.e., fishery-dependent and fishery independent). 
+
+These data provide critical information on
+
+- relative year-class strength
+- mortality
+- selectivity
+
+## Age composition
+
+Age-based stock assessments can be modeled into two classes depending on the data
+
+- Numbers-at-age
+- Proportions-at-age 
+
+### Univariate numbers-at-age
+
+#### Lognormal distribution
+
+- $x > 0$ is the observed catch (or survey index) at a given age
+- $\mu > 0$ is the calculated catch at that age (or survey index)
+- $\sigma > 0$ is a scale parameter
+
+$$
+f(x ; \mu, \sigma)=\frac{1}{\sqrt{2 \pi \sigma^{2}}} \exp \left\{\frac{-[\log (x)-\log (\mu)]^{2}}{2 \sigma^{2}}\right\} x^{-1}
+$$
+
+- mean: $\mu exp({\sigma^2}/2)$
+- median: $\mu$
+- variance: $(exp(\sigma^2)-1) exp[2log(\mu) + \sigma^2]$
+
+#### Gamma distribution
+
+- $x > 0$ is the observed catch (or survey index) at a given age
+- $\mu > 0$ is the calculated catch at that age (or survey index)
+- $\sigma > 0$ is a scale parameter
+
+$$
+f(x ; \mu, \sigma)=\frac{1}{\Gamma(\sigma)\left(\frac{\mu}{\sigma}\right)^{\sigma}} x^{\sigma-1} \exp (-x \sigma / \mu)
+$$
+
+- mean: $\mu$
+- variance: $\mu^2/\sigma$
+
+#### Generalized gamma distribution
+
+- $x > 0$ is the observed catch (or survey index) at a given age
+- $\mu > 0$ is the calculated catch at that age (or survey index)
+- $\sigma > 0$ is a scale parameter
+- $\tau \in \mathbb{R}$ is a shape parameter
+
+$$
+f_{3}(x ; \mu, \sigma, \tau)=\left\{\begin{array}{ll}
+\left.|\tau|\left(\tau^{-2}\right)^{\tau^{-2}} \exp \left(\tau^{-2}\left\{\tau \frac{\log (x)-\log (\mu)}{\sigma}-\exp \left[\tau \frac{\log (x)-\log (\mu)}{\sigma}\right]\right\}\right) \right\rvert\,\left[\sigma x \Gamma\left(\tau^{-2}\right)\right], & \tau \neq 0 \\
+(2 \pi)^{-1 / 2} \exp \left\{-\frac{[\log (x)-\log (\mu)]^{2}}{2 \sigma^{2}}\right\}(\sigma x)^{-1}, & \tau=0
+\end{array}\right
+$$
+
+#### Normal distribution
+
+#### Truncated normal distribution
+
+#### Student's t distribution
+
+### Multivariate numbers-at-age
+
+#### Multivariate lognormal
+
+### Proportions-at-age
+
+#### Multinomial
+
+#### Additive logistic-normal distribution
+
+#### Multiplicative logistic-normal distribution
+
+#### Dirichlet distribution
+
+### Summary of age composition likelihoods
+| Distribution | Class | Allows Zeros | Baranov  | Number of estimated observation parameters | Estimated correlation parameter? |
+|--------------------------------|---------------------------------------------|--------------|----------|------------------------------------------------|----------------------------------|
+| Lognormal | univariate numbers-at-age | no | median | 1 per age per fleet | no |
+| Gamma | univariate numbers-at-age | some | mean| 1 per age per fleet | no |
+| Generalized gamma | univariate numbers-at-age | some | location | 2 per age per fleet | no |
+| Normal | univariate numbers-at-age | yes | mean | 1 per age per fleet | no |
+| Left truncated normal | univariate numbers-at-age | yes | location | 1 per age per fleet | no |
+| log-Student's t | univariate numbers-at-age | no | location | 2 per age per fleet | no |
+| Multivariate lognormal | multivariate numbers-at-age | no | median | 1 per age per fleet and 1 additional per fleet | yes |
+| Multinomial | proportions-at-age total numbers/total mass |              |          |                                                |                                  |
+| Additive logistic normal  | proportions-at-age total numbers/total mass | no | location | 1 per age per fleet and 1 additional per fleet | yes |
+| Multiplicative logistic normal | proportions-at-age total numbers/total mass | no | location | 1 per age per fleet and 1 additional per fleet | yes  |
+| Dirichlet | proportions-at-age total numbers/total mass | no | mean | 1 per fleet | no |
+** table based on Table 1 in Albertsen et al., [2017](https://doi.org/10.1139/cjfas-2015-0532)

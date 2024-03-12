@@ -1,0 +1,10 @@
+---
+title: "Random effects"
+format:
+  html:
+    toc: true
+    page-layout: full
+editor: visual
+---
+
+

@@ -1,0 +1,11 @@
+---
+title: "Ecological optimization: i.e., harvest control rules 101"
+format:
+  html:
+    toc: true
+    page-layout: full
+    css: styles.css
+editor: visual
+---
+
+Optimization methods are used to find the best fishing strategy given 1) specified objective, 2) a model of stock dynamics, and 3) specified management alternatives. 

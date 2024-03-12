@@ -1,89 +1,130 @@
 ---
-title: "Understanding Stock-Recruitment"
+title: "Understanding Recruitment"
 format:
   html:
     toc: true
     page-layout: full
+    css: styles.css
 editor: visual
 ---
 
-## Stock-recruitment functions
+Notes based on:
 
-Stock-recruitment functions describe the production of new recruits to a fish population and the dependence of that production on the spawning component of the population.
+- Camp, E., Collins, A. B., Ahrens, R. N., & Lorenzen, K. (2020). [Fish population recruitment: what recruitment means and why it matters](https://edis.ifas.ufl.edu/fa222): FA222, 3/2020. EDIS, 2020(2), 6-6.
 
-# Deep dive into origin of stock-recruitment relationship
+- Miller, T.J. and Brooks, E.N., 2021. [Steepness is a slippery slope](https://doi.org/10.1111/faf.12534). Fish and Fisheries, 22(3), pp 634-645.
 
-## 
 
-## Beverton-Holt
+## Recruitment
 
-## Ricker
+**Recruitment** refers to the act of young fish transitioning between two stages of life. What is important here is what happens *before* and *after* this transition, which is when the rate at which fish die from natural mortality does not depend on the density of fish (i.e., density-independent mortality). This means that survival of an individual fish is not influenced by the number of other fish within the population. In the *before* stage, fish begin life as a fertilized egg that hatches into a larval fish. Mortality for egg and larval stages are considered density-independent because environmentally-driven variability in mortality tends to be strongest in this stage. 
+
+Eventually, they settle into habitat or aggregrate into schools. This settlement phase is where most scientists think mortality begins to be density-dependent (Walters and Juanes, 1993). During this transitional period (i.e., the recruitment period), the natural mortality does depend on the density of fish (i.e., density-dependent mortality). This means that mortaltiy will decrease (and survival will increase) with decreasing density of fish. This is based on the idea that resources during this period are limited and decreased densities reduce competition for food, space, and refuge (Walters and Juanes 1993). Fish that survive the density-dependent mortality recruitment stage are referred to as *recruits*. As fish grow in size through the recruitment period, they become less vulnerable to predators and grow large enough that density-dependent mortality ceases. This is the *after* stage. 
+
+In the context of stock assessment, we need to estimate recruitment that reproduce the observed catch and match survey trends and age composition. We also need to forecast recruitment to provide advice on future stock trajectory and catch advice. 
+
+
+## Deep dive into origin of stock-recruitment relationship
+
+**Stock-recruitment** functions describe the production of new recruits to a fish population and the dependence of that production on the spawning component of the population. It captures the effects of environmental variability, however it does not model the underlying biological processes. You cannot have recruitment without spawners (Myers and Barrowman, 1996) and recruitment cannot increase without bounds. Stock-recruitment functions pass through the origin and exhibit some form of density dependence. 
+
+Beverton and Holt (1957) found that spawning stock is generally a poor predictor of recruitment (i.e., recruitment being independent of abundance) except at relatively low stock sizes. *However, this does not mean there is no stock-recruit relationship*. There is still a link between spawning biomass and recruits (note, not a predictor); the number of eggs spawned depends on the mature component of the stock. The average survival rate from egg to recruitment decreases with increasing spawning stock size. When there is low amount of eggs, the survival rate is greater. This is all as a result of density dependent and competition where is there is a decrease in juvenile survival with increasing abundance. This refers to one of the most commonly assumed forms of the stock-recruitment function: the **Beverton-Holt** (Beverton and Holt 1957).In the Beverton-Holt function, recruitment is a function of spawning biomass $S$ that increases towards an asymptotic value with increased spawning biomass. Density dependence pertains to coexisting pre-recruits (e.g., through competition). 
+
+Another common recruitment function is the **Ricker** (1954). For the Ricker function, recruitment is an asymmetric dome-shaped function of spawning biomass $S$. Density dependence pertains to spawning biomass (e.g., through cannibalism, competition, predation).
+
+### Derivations
+
+In the original derivations, the units of spawning stock was eggs. The Beverton-Holt is derived as:
+
+$$
+R_{t + a_r} = \dfrac{E_t e^{-M_I a_r}}{1 + \dfrac{M_D}{M_I} (1-e^{-M_I a_r}) E_t}
+$$
+
+- $a_r$: age of recruitment
+- $E_t$: number of eggs spawned at time t
+- $M_D$: instantaneous density-dependent mortality rate
+- $M_I$: instantaneous density-independent mortality rate
+
+For Ricker, the mature stock is expressed in terms of the initial number of eggs laid (Ricker 1954). Thus, the function is:
+
+$$
+R_{t+a_r} = E_t e^{-(M_I + M_E E_t)a_r}
+$$
+
+- $M_E$: represent density-dependent mortality that is proportional to the initial number of eggs $E_t$
+
+It is more commeon to reparameterize these functions in terms of spawning biomass because the number of eggs produced is usually unknown. This is how it's done:
+
+$$
+E_t = \sum_a f_{t,a} m_{t,a} w_{t,a} N_{t,a}
+$$
+
+- $f_{t,a}$: relative feduncity (eggs per unit mass)
+- $m_{t,a}$: maturity at age
+- $w_{t,a}$: weight at age
+- $N_{t,a}$: abundance at age
+
+Relative fecundity is assumed to be invariant to mass or age, so that:
+
+$$
+E_t = f \sum_a m_{t,a} w_{t,a} N_{t,a} = f S_t
+$$
+
+This allows total egg production to be proportional to spawning biomass $S_t$. 
+
+This transform the Beverton-Holt function to:
+
+$$
+R_{t+a_r} = \dfrac{\alpha S_t}{1 + \beta S_t}
+$$
+
+where
+
+$$
+\alpha = f e^{-M_I a_r}
+$$
+
+and
+
+$$
+\beta = f \dfrac{M_D}{M_I} (1-e^{-M_I a_r}) = \dfrac{M_D}{M_I}(f-\alpha)
+$$
+
+$\alpha$ is proportional to the fraction surviving the pre-recruit stage from density-independent mortality, and it is the rate of recruitment when $S_t=0$. In other words, $\alpha$ is the maximum average survival rate absent of density effects. $\beta$ is a "scaling" parameter that includes density-dependent and -independent mortality components. Note that $\beta$ is a function of $\alpha$. 
+
+Ricker function of spawning biomass is:
+
+$$
+R_{t+a_r} = \alpha S_t e^{-\beta_E S_t}
+$$
+
+where
+
+$$
+\alpha = f e^{-M_I a_r}
+$$
+
+and
+
+$$
+\beta_E = f M_E a_r
+$$
+
+The $\alpha$ and $\beta_E$ terms are independent, unlike in the Beverton-Holt (aside from them being a function of the age at recruitment and relative fecundity). 
+
 
 ## What is steepness?
 
 "the fraction of recruitment from a virgin population obtained when the spawner are at 20% of the virgin level"
 
 
+## References
 
-## Equilibrium recruitment
+Beverton, R. J. H., & Holt, S. J. (1957). On the dynamics of exploited fish populations. Chapman and Hall, London, Fish and Fisheries Series No. 11, fascimile reprint 1993.
 
-## Definitions
+Myers, R. A., & Barrowman, N. J. (1996). Is fish recruitment related to spawner abundance? Fishery Bulletin, 94(4), 707–724.
 
--   $R_0$: virgin, unfished recruitment
+Ricker, W. E. (1975). Computation and interpretation of biological statistics
+of fish populations. Bulletin of the Fisheries Research Board of Canada, Number 119, 382 p.
 
--   $\Phi_0$: virgin, unfished spawning biomass per recruit
-
--   $S_{0}$: virgin unfished spawning biomass
-
--   $\Phi_F$ biomass per recruit at $F \neq 0$
-
--   $YPR_F$: yield per recruit at $F \neq 0$
-
--   $CR$: compensation ratio
-
--   $h$: steepness
-
--   $SRR$: stock-recruitment relationship
-
-## YPR quantities at various fishing mortalities
-
-Find $SBPR$ and $YPR$ at the $F$ value of interest and calculate these values when $F = 0$. This will vary depending on your model:
-
-$$
-Y P R=\Sigma_{a} F s_{a} N_{a} w_{a}
-$$
-
--   $N_a$ is a proportional expected numbers-at-age
-
--   $w_a$ is the expected weight-at-age
-
--   $s_a$ is fishery selectivity
-
-## YPR quantities at various fishing mortalities
-
-$$
-SBPR = \sum_a E_a N_a w_a
-$$
-
--   $E_a$: some measure of population's fecundity at age
-
--   the resulting $SBPR$ is going to vary with $F$ because $N_a$ will decline faster when $F$ is greater than zero.
-
-## Beverton-Holt - SRR in terms of $SBPR$
-
-## Beverton-Holt function in terms of steepness
-
-steepness as a function of proportion $p$ of unfished spawning stock size $S_0$ and $\alpha$ and the unexploited spawning biomass per recruit $\Phi_0$
-
-$$
-h(p) = \dfrac{R(S= pS_0)}{R(S=S_0)} = p \dfrac{1+\beta S_0}{1_p \beta S_0} = p \dfrac{1 + \beta \Phi_0 R_0}{1 + p \beta \Phi_0 R_0}
-$$
-
-## Beverton-Holt function in terms of steepness
-
-To complete the steepness transformation of the SRR, we must define unexploited recruitment and unexploited spawning biomass per recruit
-
-## Ricker function in terms of steepness
-steepness as a function of proportion $p$ of unfished spawning stock size $S_0$ and $\alpha$ and the unexploited spawning biomass per recruit $\Phi_0$
-
-## Conversion to compensation ratio
+Walters, C. J., & Juanes, F. (1993). Recruitment limitation as a consequence of natural selection for use of restricted feeding habitats and predation risk taking by juvenile fishes. Canadian Journal of Fisheries and Aquatic Sciences, 50(10), 2058-2070.
